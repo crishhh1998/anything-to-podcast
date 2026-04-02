@@ -10,19 +10,23 @@ EPISODES_DB = "episodes.json"
 
 
 class RSSGenerator:
-    def __init__(self, title: str, description: str, language: str, base_url: str, output_dir: str):
+    def __init__(self, title: str, description: str, language: str, base_url: str, output_dir: str, audio_base_url: str = ""):
         self.title = title
         self.description = description
         self.language = language
         self.base_url = base_url.rstrip("/")
+        self.audio_base_url = audio_base_url.rstrip("/") if audio_base_url else self.base_url
         self.output_dir = output_dir
         self.db_path = str(Path(output_dir) / EPISODES_DB)
 
-    def add_episode(self, title: str, description: str, audio_path: str, source_url: str) -> None:
+    def add_episode(self, title: str, description: str, source_url: str, audio_filename: str = "", file_size: int = 0, audio_path: str = "") -> None:
         episodes = self._load_episodes()
 
-        filename = Path(audio_path).name
-        file_size = os.path.getsize(audio_path)
+        if audio_path and not audio_filename:
+            audio_filename = Path(audio_path).name
+        if audio_path and not file_size:
+            file_size = os.path.getsize(audio_path)
+        filename = audio_filename
 
         episode = {
             "title": title,
@@ -59,7 +63,7 @@ class RSSGenerator:
             fe.description(f'{ep["description"]}\n\nSource: {ep["source_url"]}')
             fe.published(ep["pub_date"])
 
-            audio_url = f'{self.base_url}/episodes/{ep["filename"]}'
+            audio_url = f'{self.audio_base_url}/episodes/{ep["filename"]}'
             fe.enclosure(audio_url, str(ep["file_size"]), "audio/mpeg")
             fe.guid(audio_url, permalink=True)
 

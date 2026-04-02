@@ -55,17 +55,23 @@ if idx < 0 or idx >= len(eps):
     print(f'序号无效，共 {len(eps)} 期'); sys.exit(1)
 removed = eps.pop(idx)
 db.write_text(json.dumps(eps, ensure_ascii=False, indent=2))
-mp3 = Path('docs/episodes') / removed['filename']
-mp3.unlink(missing_ok=True)
 print(f'已删除: {removed[\"title\"]}')
 
-# Regenerate feed
+# Delete from OSS
 sys.path.insert(0, '.')
-from feed.rss_generator import RSSGenerator
 import yaml
 cfg = yaml.safe_load(open('config.yaml'))
+oss_cfg = cfg.get('oss', {})
+if oss_cfg:
+    from storage.oss_uploader import OSSUploader
+    uploader = OSSUploader(oss_cfg['access_key_id'], oss_cfg['access_key_secret'], oss_cfg['endpoint'], oss_cfg['bucket'], oss_cfg['base_url'])
+    uploader.delete(f'episodes/{removed[\"filename\"]}')
+    print('OSS 文件已删除')
+
+# Regenerate feed
+from feed.rss_generator import RSSGenerator
 feed_cfg = cfg.get('feed', {})
-rss = RSSGenerator(feed_cfg.get('title',''), feed_cfg.get('description',''), feed_cfg.get('language',''), feed_cfg.get('base_url',''), './docs')
+rss = RSSGenerator(feed_cfg.get('title',''), feed_cfg.get('description',''), feed_cfg.get('language',''), feed_cfg.get('base_url',''), './docs', audio_base_url=oss_cfg.get('base_url',''))
 rss._generate_feed(eps)
 print('Feed 已更新')
 " "$2"

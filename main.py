@@ -13,6 +13,7 @@ from fetchers.base import FetchResult
 from processor.script_generator import ScriptGenerator
 from tts.edge_tts_engine import EdgeTTSEngine
 from feed.rss_generator import RSSGenerator
+from storage.oss_uploader import OSSUploader
 
 
 def load_config(config_path: str = "config.yaml") -> dict:
@@ -82,7 +83,7 @@ def generate_episode(url: str, config: dict) -> None:
     print(f"  Script length: {len(script)} chars")
 
     # Step 3: Synthesize audio
-    print("[3/4] Synthesizing audio...")
+    print("[3/5] Synthesizing audio...")
     tts_cfg = config.get("tts", {})
     engine = EdgeTTSEngine(
         voice=tts_cfg.get("voice", "zh-CN-XiaoxiaoNeural"),
@@ -91,8 +92,26 @@ def generate_episode(url: str, config: dict) -> None:
     audio_path = engine.synthesize(script, result.title, episodes_dir)
     print(f"  Audio saved: {audio_path}")
 
-    # Step 4: Update RSS feed
-    print("[4/4] Updating RSS feed...")
+    # Step 4: Upload to OSS
+    print("[4/5] Uploading to OSS...")
+    oss_cfg = config["oss"]
+    uploader = OSSUploader(
+        access_key_id=oss_cfg["access_key_id"],
+        access_key_secret=oss_cfg["access_key_secret"],
+        endpoint=oss_cfg["endpoint"],
+        bucket=oss_cfg["bucket"],
+        base_url=oss_cfg["base_url"],
+    )
+    filename = Path(audio_path).name
+    audio_size = Path(audio_path).stat().st_size
+    audio_url = uploader.upload(audio_path, f"episodes/{filename}")
+    print(f"  OSS URL: {audio_url}")
+
+    # Remove local MP3 from docs/episodes (no longer needed in git)
+    Path(audio_path).unlink(missing_ok=True)
+
+    # Step 5: Update RSS feed
+    print("[5/5] Updating RSS feed...")
     feed_cfg = config.get("feed", {})
     rss = RSSGenerator(
         title=feed_cfg.get("title", "Anything to Podcast"),
@@ -100,11 +119,13 @@ def generate_episode(url: str, config: dict) -> None:
         language=feed_cfg.get("language", "zh-cn"),
         base_url=feed_cfg.get("base_url", "http://localhost:8080"),
         output_dir=output_dir,
+        audio_base_url=oss_cfg["base_url"],
     )
     rss.add_episode(
         title=result.title,
         description=f"Source: {result.source_type} | {result.url}",
-        audio_path=audio_path,
+        audio_filename=filename,
+        file_size=audio_size,
         source_url=url,
     )
     print("Done! Episode added to feed.")
