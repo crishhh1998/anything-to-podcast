@@ -49,6 +49,9 @@ class RSSGenerator:
         fg.podcast.itunes_category("Technology")
         fg.podcast.itunes_author(self.title)
         fg.podcast.itunes_explicit("no")
+        fg.podcast.itunes_summary(self.description)
+        fg.podcast.itunes_owner(name=self.title, email="noreply@example.com")
+        fg.image(url=f"{self.base_url}/cover.jpg", title=self.title)
 
         for ep in reversed(episodes):
             fe = fg.add_entry()
