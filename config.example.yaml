@@ -17,5 +17,9 @@ server:
   host: "0.0.0.0"
   port: 8080
 
+notion:
+  token: "ntn_xxx"
+  parent_page_id: "your-page-id"
+
 output_dir: "./output"
 twitter_cookies: "./cookies.txt"

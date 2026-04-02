@@ -10,7 +10,7 @@ import yaml
 
 from fetchers import ArxivFetcher, PdfFetcher, RedditFetcher, TwitterFetcher
 from fetchers.base import FetchResult
-from processor.script_generator import ScriptGenerator
+from processor.script_generator import ScriptGenerator, ScriptResult
 from tts.edge_tts_engine import EdgeTTSEngine
 from feed.rss_generator import RSSGenerator
 from storage.oss_uploader import OSSUploader
@@ -66,34 +66,35 @@ def generate_episode(url: str, config: dict) -> None:
 
     # Step 1: Fetch content
     source_type = detect_source(url)
-    print(f"[1/4] Fetching content ({source_type})...")
+    print(f"[1/6] Fetching content ({source_type})...")
     result = fetch_content(url, source_type, config)
     print(f"  Title: {result.title}")
     print(f"  Content length: {len(result.content)} chars")
 
-    # Step 2: Generate podcast script via LLM
-    print("[2/4] Generating podcast script...")
+    # Step 2: Generate podcast scripts (short + long) via LLM
+    print("[2/6] Generating podcast scripts (short + long)...")
     llm_cfg = config["llm"]
     generator = ScriptGenerator(
         base_url=llm_cfg["base_url"],
         api_key=llm_cfg["api_key"],
         model=llm_cfg["model"],
     )
-    script = generator.generate(result)
-    print(f"  Script length: {len(script)} chars")
+    scripts = generator.generate(result)
+    print(f"  Short script: {len(scripts.short)} chars")
+    print(f"  Long script: {len(scripts.long)} chars")
 
-    # Step 3: Synthesize audio
-    print("[3/5] Synthesizing audio...")
+    # Step 3: Synthesize audio (from long script)
+    print("[3/6] Synthesizing audio (long version)...")
     tts_cfg = config.get("tts", {})
     engine = EdgeTTSEngine(
         voice=tts_cfg.get("voice", "zh-CN-XiaoxiaoNeural"),
         rate=tts_cfg.get("rate", "+0%"),
     )
-    audio_path = engine.synthesize(script, result.title, episodes_dir)
+    audio_path = engine.synthesize(scripts.long, result.title, episodes_dir)
     print(f"  Audio saved: {audio_path}")
 
     # Step 4: Upload to OSS
-    print("[4/5] Uploading to OSS...")
+    print("[4/6] Uploading to OSS...")
     oss_cfg = config["oss"]
     uploader = OSSUploader(
         access_key_id=oss_cfg["access_key_id"],
@@ -110,8 +111,28 @@ def generate_episode(url: str, config: dict) -> None:
     # Remove local MP3 from docs/episodes (no longer needed in git)
     Path(audio_path).unlink(missing_ok=True)
 
-    # Step 5: Update RSS feed
-    print("[5/5] Updating RSS feed...")
+    # Step 5: Save scripts to Notion
+    print("[5/6] Saving scripts to Notion...")
+    notion_cfg = config.get("notion", {})
+    if notion_cfg.get("parent_page_id"):
+        from notion.writer import NotionWriter
+        writer = NotionWriter(
+            token=notion_cfg["token"],
+            parent_page_id=notion_cfg["parent_page_id"],
+        )
+        writer.save_scripts(
+            title=result.title,
+            source_url=url,
+            source_type=result.source_type,
+            short_script=scripts.short,
+            long_script=scripts.long,
+        )
+        print("  Scripts saved to Notion.")
+    else:
+        print("  Notion not configured, skipping.")
+
+    # Step 6: Update RSS feed
+    print("[6/6] Updating RSS feed...")
     feed_cfg = config.get("feed", {})
     rss = RSSGenerator(
         title=feed_cfg.get("title", "Anything to Podcast"),
