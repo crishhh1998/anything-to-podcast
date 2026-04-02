@@ -1,0 +1,155 @@
+#!/usr/bin/env python3
+"""Anything to Podcast - Convert URLs to Chinese podcast episodes."""
+
+import argparse
+import sys
+from pathlib import Path
+from urllib.parse import urlparse
+
+import yaml
+
+from fetchers import ArxivFetcher, PdfFetcher, RedditFetcher, TwitterFetcher
+from fetchers.base import FetchResult
+from processor.script_generator import ScriptGenerator
+from tts.edge_tts_engine import EdgeTTSEngine
+from feed.rss_generator import RSSGenerator
+
+
+def load_config(config_path: str = "config.yaml") -> dict:
+    with open(config_path) as f:
+        return yaml.safe_load(f)
+
+
+def detect_source(url: str) -> str:
+    """Detect source type from URL or local file path."""
+    # Local file
+    if Path(url).exists():
+        return "local_pdf"
+
+    parsed = urlparse(url)
+    host = parsed.hostname or ""
+
+    if "arxiv.org" in host:
+        return "arxiv"
+    if "reddit.com" in host or "redd.it" in host:
+        return "reddit"
+    if "twitter.com" in host or "x.com" in host:
+        return "twitter"
+    if parsed.path.endswith(".pdf"):
+        return "pdf"
+
+    # Default to PDF for unknown URLs
+    print(f"Warning: cannot detect source type for {url}, treating as PDF")
+    return "pdf"
+
+
+def fetch_content(url: str, source_type: str, config: dict) -> FetchResult:
+    """Fetch content based on source type."""
+    if source_type == "arxiv":
+        return ArxivFetcher().fetch(url)
+    elif source_type == "reddit":
+        return RedditFetcher().fetch(url)
+    elif source_type == "twitter":
+        cookies_path = config.get("twitter_cookies", "./cookies.txt")
+        return TwitterFetcher(cookies_path=cookies_path).fetch(url)
+    elif source_type == "local_pdf":
+        return PdfFetcher().fetch_local(url)
+    else:
+        return PdfFetcher().fetch(url)
+
+
+def generate_episode(url: str, config: dict) -> None:
+    """Full pipeline: fetch → script → TTS → RSS."""
+    output_dir = config.get("output_dir", "./output")
+    episodes_dir = str(Path(output_dir) / "episodes")
+
+    # Step 1: Fetch content
+    source_type = detect_source(url)
+    print(f"[1/4] Fetching content ({source_type})...")
+    result = fetch_content(url, source_type, config)
+    print(f"  Title: {result.title}")
+    print(f"  Content length: {len(result.content)} chars")
+
+    # Step 2: Generate podcast script via LLM
+    print("[2/4] Generating podcast script...")
+    llm_cfg = config["llm"]
+    generator = ScriptGenerator(
+        base_url=llm_cfg["base_url"],
+        api_key=llm_cfg["api_key"],
+        model=llm_cfg["model"],
+    )
+    script = generator.generate(result)
+    print(f"  Script length: {len(script)} chars")
+
+    # Step 3: Synthesize audio
+    print("[3/4] Synthesizing audio...")
+    tts_cfg = config.get("tts", {})
+    engine = EdgeTTSEngine(
+        voice=tts_cfg.get("voice", "zh-CN-XiaoxiaoNeural"),
+        rate=tts_cfg.get("rate", "+0%"),
+    )
+    audio_path = engine.synthesize(script, result.title, episodes_dir)
+    print(f"  Audio saved: {audio_path}")
+
+    # Step 4: Update RSS feed
+    print("[4/4] Updating RSS feed...")
+    feed_cfg = config.get("feed", {})
+    rss = RSSGenerator(
+        title=feed_cfg.get("title", "Anything to Podcast"),
+        description=feed_cfg.get("description", "自动生成的播客"),
+        language=feed_cfg.get("language", "zh-cn"),
+        base_url=feed_cfg.get("base_url", "http://localhost:8080"),
+        output_dir=output_dir,
+    )
+    rss.add_episode(
+        title=result.title,
+        description=f"Source: {result.source_type} | {result.url}",
+        audio_path=audio_path,
+        source_url=url,
+    )
+    print("Done! Episode added to feed.")
+
+
+def list_episodes(config: dict) -> None:
+    """List all generated episodes."""
+    output_dir = config.get("output_dir", "./output")
+    feed_cfg = config.get("feed", {})
+    rss = RSSGenerator(
+        title=feed_cfg.get("title", ""),
+        description="",
+        language="",
+        base_url="",
+        output_dir=output_dir,
+    )
+    episodes = rss.list_episodes()
+    if not episodes:
+        print("No episodes yet.")
+        return
+
+    for i, ep in enumerate(episodes, 1):
+        print(f"{i}. [{ep['pub_date'][:10]}] {ep['title']}")
+        print(f"   Source: {ep['source_url']}")
+        print(f"   File: {ep['filename']}")
+        print()
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Anything to Podcast")
+    parser.add_argument("url", nargs="?", help="URL to convert to podcast")
+    parser.add_argument("--config", default="config.yaml", help="Config file path")
+    parser.add_argument("--list", action="store_true", help="List all episodes")
+    args = parser.parse_args()
+
+    config = load_config(args.config)
+
+    if args.list:
+        list_episodes(config)
+    elif args.url:
+        generate_episode(args.url, config)
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

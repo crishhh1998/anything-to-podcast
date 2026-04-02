@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+  <channel>
+    <title>Anything to Podcast</title>
+    <link>https://crishhh1998.github.io/anything-to-podcast</link>
+    <description>自动生成的播客</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>python-feedgen</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 02 Apr 2026 12:00:47 +0000</lastBuildDate>
+    <itunes:author>Anything to Podcast</itunes:author>
+    <itunes:category text="Technology"/>
+    <itunes:explicit>no</itunes:explicit>
+    <item>
+      <title>End-to-End Autoregressive Image Generation with 1D Semantic Tokenizer</title>
+      <description>Source: report | /Users/lihui/anything_to_podcast/20469_End_to_End_Autoregressiv.pdf
+
+Source: /Users/lihui/anything_to_podcast/20469_End_to_End_Autoregressiv.pdf</description>
+      <guid isPermaLink="true">https://crishhh1998.github.io/anything-to-podcast/episodes/20260402_193041_End-to-End_Autoregressive_Image_Generation_with_1D.mp3</guid>
+      <enclosure url="https://crishhh1998.github.io/anything-to-podcast/episodes/20260402_193041_End-to-End_Autoregressive_Image_Generation_with_1D.mp3" length="19370362" type="audio/mpeg"/>
+      <pubDate>Thu, 02 Apr 2026 11:31:57 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
