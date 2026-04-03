@@ -25,5 +25,14 @@
     "source_url": "https://arxiv.org/pdf/2403.03206",
     "pub_date": "2026-04-03T08:01:34.705989+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强_chapters.json"
+  },
+  {
+    "title": "REPA：对齐强表征让DiT训练快17.5倍",
+    "description": "这期讲一篇很“反直觉”的工作：扩散 Transformer 训练慢，未必主要是去噪难，而可能是内部表征学得不够好。REPA 的做法非常轻量，只是在训练时把生成模型的中间特征对齐到 DINOv2、CLIP 这类强视觉编码器的 patch 表征上。结果是 SiT 和 DiT 不仅收敛大幅加速，FID 还显著提升，说明给生成模型搭一个“表征脚手架”真的有效。\n\n00:00 背景与动机\n02:03 方法拆解\n04:49 实验结果深读\n10:50 图表导读\n12:14 评价与讨论\n14:08 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2410.06940",
+    "filename": "20260403_162414_REPA_对齐强表征让DiT训练快17_5倍.mp3",
+    "file_size": 15093590,
+    "source_url": "https://arxiv.org/pdf/2410.06940",
+    "pub_date": "2026-04-03T08:25:35.271990+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍_chapters.json"
   }
 ]
