@@ -230,6 +230,7 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
         file_size=audio_size,
         source_url=url,
         chapters_url=chapters_url,
+        duration_seconds=tts_result.duration_seconds,
     )
     print("Done! Episode added to feed.")
 

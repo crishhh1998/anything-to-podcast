@@ -23,6 +23,7 @@ class Chapter:
 class TTSResult:
     audio_path: str
     chapters: list[Chapter]
+    duration_seconds: float = 0.0
 
 
 def parse_chapters(text: str) -> list[tuple[str, str]]:
@@ -101,7 +102,8 @@ class EdgeTTSEngine:
             asyncio.run(self._synthesize(text, tmp_path))
             self._convert_to_standard_mp3(tmp_path, output_path)
             Path(tmp_path).unlink(missing_ok=True)
-            return TTSResult(audio_path=output_path, chapters=[])
+            duration = _get_mp3_duration(output_path)
+            return TTSResult(audio_path=output_path, chapters=[], duration_seconds=duration)
 
         # Synthesize each chapter separately
         chapter_files = []
@@ -136,7 +138,7 @@ class EdgeTTSEngine:
         # Embed chapter markers into MP3 ID3 tags
         _embed_chapters(output_path, chapters, cumulative_seconds)
 
-        return TTSResult(audio_path=output_path, chapters=chapters)
+        return TTSResult(audio_path=output_path, chapters=chapters, duration_seconds=cumulative_seconds)
 
 
 def _embed_chapters(mp3_path: str, chapters: list[Chapter], total_seconds: float) -> None:

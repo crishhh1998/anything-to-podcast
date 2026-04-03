@@ -23,7 +23,8 @@ class RSSGenerator:
 
     def add_episode(self, title: str, description: str, source_url: str,
                     audio_filename: str = "", file_size: int = 0,
-                    audio_path: str = "", chapters_url: str = "") -> None:
+                    audio_path: str = "", chapters_url: str = "",
+                    duration_seconds: float = 0.0) -> None:
         episodes = self._load_episodes()
 
         if audio_path and not audio_filename:
@@ -40,6 +41,7 @@ class RSSGenerator:
             "source_url": source_url,
             "pub_date": datetime.now(timezone.utc).isoformat(),
             "chapters_url": chapters_url,
+            "duration_seconds": duration_seconds,
         }
 
         episodes.append(episode)
@@ -59,8 +61,10 @@ class RSSGenerator:
         fg.podcast.itunes_author(self.title)
         fg.podcast.itunes_explicit("no")
         fg.podcast.itunes_summary(self.description)
-        fg.podcast.itunes_owner(name=self.title, email="noreply@example.com")
+        fg.podcast.itunes_owner(name=self.title, email="1324982600@qq.com")
+        fg.podcast.itunes_type("episodic")
         fg.image(url=f"{self.base_url}/cover.jpg", title=self.title)
+        fg.podcast.itunes_image(f"{self.base_url}/cover.jpg")
 
         for ep in reversed(episodes):
             fe = fg.add_entry()
@@ -71,6 +75,14 @@ class RSSGenerator:
             audio_url = f'{self.audio_base_url}/episodes/{ep["filename"]}'
             fe.enclosure(audio_url, str(ep["file_size"]), "audio/mpeg")
             fe.guid(audio_url, permalink=True)
+
+            duration_secs = ep.get("duration_seconds", 0)
+            if duration_secs:
+                total_secs = int(duration_secs)
+                h, rem = divmod(total_secs, 3600)
+                m, s = divmod(rem, 60)
+                duration_str = f"{h:02d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+                fe.podcast.itunes_duration(duration_str)
 
         # Generate the base RSS XML
         feed_path = str(Path(self.output_dir) / "feed.xml")
