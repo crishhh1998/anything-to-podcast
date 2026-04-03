@@ -16,5 +16,14 @@
     "source_url": "https://arxiv.org/pdf/2401.08740",
     "pub_date": "2026-04-03T07:52:18.709414+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json"
+  },
+  {
+    "title": "Rectified Flow：让高分辨率文生图又快又强",
+    "description": "这期聊 Stability AI 如何把 Rectified Flow 真正做成高分辨率文生图的可行主线，不只改生成路径，还重做了时间采样和多模态 Transformer。论文最强之处在于系统验证：在大量配方对比中，rf/lognorm(0,1) 和 MM-DiT 同时提升画质、语义对齐和少步采样效率。更关键的是，它把模型扩展到 8B 后，在 GenEval 和人类偏好上超过 DALL·E 3，几乎就是 Stable Diffusion 3 的技术宣言。\n\n00:00 背景与动机\n01:46 方法拆解\n04:37 实验结果深读\n12:00 图表导读\n13:35 评价与讨论\n15:07 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2403.03206",
+    "filename": "20260403_160038_Rectified_Flow_让高分辨率文生图又快又强.mp3",
+    "file_size": 16111921,
+    "source_url": "https://arxiv.org/pdf/2403.03206",
+    "pub_date": "2026-04-03T08:01:34.705989+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强_chapters.json"
   }
 ]

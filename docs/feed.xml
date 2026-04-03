@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 07:56:40 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 08:01:34 +0000</lastBuildDate>
     <itunes:author>Anything to Podcast</itunes:author>
     <itunes:category text="Technology" />
     <itunes:explicit>no</itunes:explicit>
@@ -36,7 +36,7 @@ Source: paper | https://arxiv.org/pdf/2212.09748</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3" length="18442282" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 07:26:20 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>SiT：重构扩散路径，全面超越DiT</title>
       <description>这期聊 SiT 如何在不改 DiT 骨干和参数量的前提下，把扩散模型里的路径、目标函数和采样方式拆开重做。论文发现学 velocity 比学 score 更稳，Linear 和 GVP 路径也比传统 VP 更好优化，推理时甚至还能单独调采样噪声继续提性能。在 ImageNet 256×256 和 512×512 上，SiT 都稳定优于 DiT，说明它不只是刷分，而是在统一 flow 与 diffusion 的设计空间。
@@ -52,6 +52,22 @@ Source: paper | https://arxiv.org/pdf/2401.08740</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT.mp3" length="16394744" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 07:52:18 +0000</pubDate>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json" type="application/json+chapters" /></item>
+    <item>
+      <title>Rectified Flow：让高分辨率文生图又快又强</title>
+      <description>这期聊 Stability AI 如何把 Rectified Flow 真正做成高分辨率文生图的可行主线，不只改生成路径，还重做了时间采样和多模态 Transformer。论文最强之处在于系统验证：在大量配方对比中，rf/lognorm(0,1) 和 MM-DiT 同时提升画质、语义对齐和少步采样效率。更关键的是，它把模型扩展到 8B 后，在 GenEval 和人类偏好上超过 DALL·E 3，几乎就是 Stable Diffusion 3 的技术宣言。
+
+00:00 背景与动机
+01:46 方法拆解
+04:37 实验结果深读
+12:00 图表导读
+13:35 评价与讨论
+15:07 延伸思考
+
+Source: paper | https://arxiv.org/pdf/2403.03206</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强.mp3" length="16111921" type="audio/mpeg" />
+      <pubDate>Fri, 03 Apr 2026 08:01:34 +0000</pubDate>
     <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成_chapters.json" type="application/json+chapters" /></item>
   </channel>
 </rss>
