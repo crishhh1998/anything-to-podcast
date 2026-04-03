@@ -61,5 +61,15 @@
     "source_url": "https://arxiv.org/pdf/2405.14867",
     "pub_date": "2026-04-03T09:10:45.727900+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步_chapters.json"
+  },
+  {
+    "title": "LeWM：从像素稳定学会世界模型",
+    "description": "这期聊 LeWorldModel，看看它如何只靠预测损失加一个高斯正则，就稳定训练端到端 JEPA world model，避免表征坍塌。它不做像素重建，而是直接学习对未来最有用的 latent，在 Push-T 上明显超过 JEPA baseline，还比基于预训练特征的方法快近 48 倍。我们也会讲清它为什么有效、在哪些场景还不够强，以及这项工作为何让“单卡可复现的世界模型”更进一步。\n\n00:00 背景与动机\n01:54 方法拆解\n04:29 实验结果深读\n11:32 图表导读\n12:58 评价与讨论\n14:26 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2603.19312",
+    "filename": "20260403_175426_LeWM_从像素稳定学会世界模型.mp3",
+    "file_size": 15358005,
+    "source_url": "https://arxiv.org/pdf/2603.19312",
+    "pub_date": "2026-04-03T09:56:40.488269+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_175426_LeWM_从像素稳定学会世界模型_chapters.json",
+    "duration_seconds": 958.5600690000001
   }
 ]
