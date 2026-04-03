@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 05:45:26 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 05:50:10 +0000</lastBuildDate>
     <itunes:author>Anything to Podcast</itunes:author>
     <itunes:category text="Technology"/>
     <itunes:explicit>no</itunes:explicit>
@@ -47,6 +47,15 @@ Source: https://arxiv.org/pdf/2311.18828</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_132952_One-step_Diffusion_with_Distribution_Matching_Dist.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_132952_One-step_Diffusion_with_Distribution_Matching_Dist.mp3" length="7282982" type="audio/mpeg"/>
       <pubDate>Fri, 03 Apr 2026 05:30:20 +0000</pubDate>
+    </item>
+    <item>
+      <title>Self-Supervised Flow Matching for Scalable Multi-Modal Synthesis</title>
+      <description>Source: paper | https://arxiv.org/pdf/2603.06507
+
+Source: https://arxiv.org/pdf/2603.06507</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_134917_Self-Supervised_Flow_Matching_for_Scalable_Multi-M.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_134917_Self-Supervised_Flow_Matching_for_Scalable_Multi-M.mp3" length="13771381" type="audio/mpeg"/>
+      <pubDate>Fri, 03 Apr 2026 05:50:10 +0000</pubDate>
     </item>
   </channel>
 </rss>
