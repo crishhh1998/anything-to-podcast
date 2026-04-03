@@ -34,5 +34,14 @@
     "source_url": "https://arxiv.org/pdf/2410.06940",
     "pub_date": "2026-04-03T08:25:35.271990+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍_chapters.json"
+  },
+  {
+    "title": "RAE-DiT：用表征自编码器释放扩散生成上限",
+    "description": "这期聊一篇很强的 DiT 论文：作者用 DINO、SigLIP、MAE 这类“更懂图像”的预训练表征编码器，替换老式 VAE，做成新的 Representation Autoencoder。核心发现是高语义 latent 虽然更强，但也会逼着 Diffusion Transformer 一起升级，包括更匹配的宽度、重新设计的噪声日程，以及能处理带噪 latent 的 decoder。实验上它不仅在 ImageNet 上把 FID 做到 SOTA，更重要的是提出了一个方向：自编码器不该只是压缩工具，而应成为连接视觉理解与生成的表示基础设施。\n\n00:00 背景与动机\n01:42 方法拆解\n04:44 实验结果解读\n09:39 图表导读\n11:10 评价与讨论\n12:49 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2510.11690",
+    "filename": "20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限.mp3",
+    "file_size": 13394142,
+    "source_url": "https://arxiv.org/pdf/2510.11690",
+    "pub_date": "2026-04-03T08:49:38.161634+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限_chapters.json"
   }
 ]
