@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "title": "DiT：用Transformer扩展扩散生成",
+    "description": "这期聊 DiT 如何把扩散模型从卷积 U-Net 带到 ViT 式 Transformer，并在 VAE latent 空间里生成图像。核心亮点是 adaLN-Zero 条件注入和清晰的 scaling law：前向计算量越大，FID 越低。它不仅在 ImageNet 上做到当时最强结果，也开启了“按 Transformer 方式扩展扩散模型”的新路线。\n\n00:00 背景与动机\n02:20 方法拆解\n05:40 实验结果深读\n12:55 图表导读\n14:27 评价与讨论\n17:12 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2212.09748",
+    "filename": "20260403_152512_DiT_用Transformer扩展扩散生成.mp3",
+    "file_size": 18442282,
+    "source_url": "https://arxiv.org/pdf/2212.09748",
+    "pub_date": "2026-04-03T07:26:20.035094+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成_chapters.json"
+  }
+]

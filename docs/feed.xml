@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:ns0="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0" xmlns:podcast="https://podcastindex.org/namespace/1.0">
+<rss xmlns:ns0="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0" xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>Anything to Podcast</title>
     <link>https://crishhh1998.github.io/anything-to-podcast</link>
@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 07:07:38 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 07:26:20 +0000</lastBuildDate>
     <ns0:author>Anything to Podcast</ns0:author>
     <ns0:category text="Technology" />
     <ns0:explicit>no</ns0:explicit>
@@ -21,5 +21,23 @@
       <ns0:email>noreply@example.com</ns0:email>
     </ns0:owner>
     <ns0:summary>自动生成的播客</ns0:summary>
+    <item>
+      <title>DiT：用Transformer扩展扩散生成</title>
+      <description>这期聊 DiT 如何把扩散模型从卷积 U-Net 带到 ViT 式 Transformer，并在 VAE latent 空间里生成图像。核心亮点是 adaLN-Zero 条件注入和清晰的 scaling law：前向计算量越大，FID 越低。它不仅在 ImageNet 上做到当时最强结果，也开启了“按 Transformer 方式扩展扩散模型”的新路线。
+
+00:00 背景与动机
+02:20 方法拆解
+05:40 实验结果深读
+12:55 图表导读
+14:27 评价与讨论
+17:12 延伸思考
+
+Source: paper | https://arxiv.org/pdf/2212.09748
+
+Source: https://arxiv.org/pdf/2212.09748</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3" length="18442282" type="audio/mpeg" />
+      <pubDate>Fri, 03 Apr 2026 07:26:20 +0000</pubDate>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成_chapters.json" type="application/json+chapters" /></item>
   </channel>
 </rss>
