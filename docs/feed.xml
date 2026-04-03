@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss xmlns:ns0="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0" xmlns:podcast="https://podcastindex.org/namespace/1.0">
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0">
   <channel>
     <title>Anything to Podcast</title>
     <link>https://crishhh1998.github.io/anything-to-podcast</link>
@@ -12,15 +12,15 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 07:26:20 +0000</lastBuildDate>
-    <ns0:author>Anything to Podcast</ns0:author>
-    <ns0:category text="Technology" />
-    <ns0:explicit>no</ns0:explicit>
-    <ns0:owner>
-      <ns0:name>Anything to Podcast</ns0:name>
-      <ns0:email>noreply@example.com</ns0:email>
-    </ns0:owner>
-    <ns0:summary>自动生成的播客</ns0:summary>
+    <lastBuildDate>Fri, 03 Apr 2026 07:34:21 +0000</lastBuildDate>
+    <itunes:author>Anything to Podcast</itunes:author>
+    <itunes:category text="Technology" />
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:owner>
+      <itunes:name>Anything to Podcast</itunes:name>
+      <itunes:email>noreply@example.com</itunes:email>
+    </itunes:owner>
+    <itunes:summary>自动生成的播客</itunes:summary>
     <item>
       <title>DiT：用Transformer扩展扩散生成</title>
       <description>这期聊 DiT 如何把扩散模型从卷积 U-Net 带到 ViT 式 Transformer，并在 VAE latent 空间里生成图像。核心亮点是 adaLN-Zero 条件注入和清晰的 scaling law：前向计算量越大，FID 越低。它不仅在 ImageNet 上做到当时最强结果，也开启了“按 Transformer 方式扩展扩散模型”的新路线。
@@ -32,9 +32,7 @@
 14:27 评价与讨论
 17:12 延伸思考
 
-Source: paper | https://arxiv.org/pdf/2212.09748
-
-Source: https://arxiv.org/pdf/2212.09748</description>
+Source: paper | https://arxiv.org/pdf/2212.09748</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3" length="18442282" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 07:26:20 +0000</pubDate>
