@@ -1,0 +1,22 @@
+# 每行一个 URL 或本地 PDF 路径，# 开头的行会被忽略
+# https://arxiv.org/pdf/2404.02905
+# SiT
+#https://arxiv.org/pdf/2401.08740
+# DiT
+#https://arxiv.org/pdf/2212.09748
+# RAE
+#https://arxiv.org/pdf/2510.11690
+# Meanflow
+#https://arxiv.org/pdf/2505.13447
+# REPA
+#https://arxiv.org/pdf/2410.06940
+# SD3
+#https://arxiv.org/pdf/2403.03206
+# Wan
+# https://arxiv.org/pdf/2503.20314
+# DMD
+# https://arxiv.org/pdf/2311.18828
+# context as memory
+https://arxiv.org/pdf/2506.03141
+# self-forcing
+https://arxiv.org/pdf/2506.08009v1

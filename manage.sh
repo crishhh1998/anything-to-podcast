@@ -6,12 +6,15 @@ cd "$(dirname "$0")"
 usage() {
     echo "用法:"
     echo "  ./manage.sh add <url或本地pdf路径>   生成并发布新一期"
+    echo "  ./manage.sh test <url或本地pdf路径>  测试模式：只生成文稿并保存到 Notion"
+    echo "  ./manage.sh batch <urls.txt> [prompts_dir]  批量测试多篇 paper × 多组 prompt"
     echo "  ./manage.sh list                     列出所有期"
     echo "  ./manage.sh delete <序号>            删除某一期"
     echo ""
     echo "示例:"
     echo "  ./manage.sh add https://arxiv.org/pdf/2404.02905"
-    echo "  ./manage.sh add ./paper.pdf"
+    echo "  ./manage.sh test ./paper.pdf"
+    echo "  ./manage.sh batch batch_urls.txt prompt_variants/"
     echo "  ./manage.sh list"
     echo "  ./manage.sh delete 1"
 }
@@ -25,6 +28,15 @@ publish() {
 }
 
 case "${1}" in
+    test)
+        [ -z "$2" ] && echo "请提供 URL 或文件路径" && exit 1
+        python main.py --test "$2"
+        ;;
+    batch)
+        [ -z "$2" ] && echo "请提供 URL 列表文件" && exit 1
+        PROMPTS_DIR="${3:-./prompt_variants}"
+        python main.py --batch "$2" --prompts "$PROMPTS_DIR"
+        ;;
     add)
         [ -z "$2" ] && echo "请提供 URL 或文件路径" && exit 1
         python main.py "$2"

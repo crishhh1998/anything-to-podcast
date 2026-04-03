@@ -59,8 +59,59 @@ def fetch_content(url: str, source_type: str, config: dict) -> FetchResult:
         return PdfFetcher().fetch(url)
 
 
+def save_to_notion(config: dict, title: str, url: str, source_type: str,
+                    short_script: str, long_script: str) -> None:
+    """Save scripts to Notion if configured."""
+    notion_cfg = config.get("notion", {})
+    if not notion_cfg.get("parent_page_id"):
+        print("  Notion not configured, skipping.")
+        return
+
+    from notion.writer import NotionWriter
+    writer = NotionWriter(
+        token=notion_cfg["token"],
+        parent_page_id=notion_cfg["parent_page_id"],
+    )
+    writer.save_scripts(
+        title=title,
+        source_url=url,
+        source_type=source_type,
+        short_script=short_script,
+        long_script=long_script,
+    )
+    print("  Scripts saved to Notion.")
+
+
+def test_scripts(url: str, config: dict) -> None:
+    """Test mode: fetch → generate scripts → save to Notion. No audio/OSS/RSS."""
+    # Step 1: Fetch content
+    source_type = detect_source(url)
+    print(f"[1/3] Fetching content ({source_type})...")
+    result = fetch_content(url, source_type, config)
+    print(f"  Title: {result.title}")
+    print(f"  Content length: {len(result.content)} chars")
+
+    # Step 2: Generate podcast scripts (short + long) via LLM
+    print("[2/3] Generating podcast scripts (short + long)...")
+    llm_cfg = config["llm"]
+    generator = ScriptGenerator(
+        base_url=llm_cfg["base_url"],
+        api_key=llm_cfg["api_key"],
+        model=llm_cfg["model"],
+    )
+    scripts = generator.generate(result)
+    print(f"  Short script: {len(scripts.short)} chars")
+    print(f"  Long script: {len(scripts.long)} chars")
+
+    # Step 3: Save scripts to Notion
+    print("[3/3] Saving scripts to Notion...")
+    save_to_notion(config, result.title, url, result.source_type,
+                   scripts.short, scripts.long)
+    print("Done! (test mode — no audio/OSS/RSS)")
+
+
 def generate_episode(url: str, config: dict) -> None:
-    """Full pipeline: fetch → script → TTS → RSS."""
+    """Full pipeline: fetch → script → TTS → OSS → Notion → RSS."""
     output_dir = config.get("output_dir", "./output")
     episodes_dir = str(Path(output_dir) / "episodes")
 
@@ -113,23 +164,8 @@ def generate_episode(url: str, config: dict) -> None:
 
     # Step 5: Save scripts to Notion
     print("[5/6] Saving scripts to Notion...")
-    notion_cfg = config.get("notion", {})
-    if notion_cfg.get("parent_page_id"):
-        from notion.writer import NotionWriter
-        writer = NotionWriter(
-            token=notion_cfg["token"],
-            parent_page_id=notion_cfg["parent_page_id"],
-        )
-        writer.save_scripts(
-            title=result.title,
-            source_url=url,
-            source_type=result.source_type,
-            short_script=scripts.short,
-            long_script=scripts.long,
-        )
-        print("  Scripts saved to Notion.")
-    else:
-        print("  Notion not configured, skipping.")
+    save_to_notion(config, result.title, url, result.source_type,
+                   scripts.short, scripts.long)
 
     # Step 6: Update RSS feed
     print("[6/6] Updating RSS feed...")
@@ -150,6 +186,110 @@ def generate_episode(url: str, config: dict) -> None:
         source_url=url,
     )
     print("Done! Episode added to feed.")
+
+
+def load_prompt_variants(prompts_dir: str) -> list[tuple[str, str]]:
+    """Load prompt variant .md files from a directory.
+
+    Returns:
+        List of (variant_name, template_string) sorted by filename.
+    """
+    prompts_path = Path(prompts_dir)
+    if not prompts_path.is_dir():
+        print(f"Error: prompt directory not found: {prompts_dir}")
+        sys.exit(1)
+
+    variants = []
+    for md_file in sorted(prompts_path.glob("*.md")):
+        name = md_file.stem
+        template = md_file.read_text(encoding="utf-8").strip()
+        if "{content}" not in template:
+            print(f"Warning: {md_file.name} missing {{content}} placeholder, skipping")
+            continue
+        variants.append((name, template))
+
+    if not variants:
+        print(f"Error: no valid .md prompt files in {prompts_dir}")
+        sys.exit(1)
+
+    return variants
+
+
+def load_urls(urls_file: str) -> list[str]:
+    """Load URLs from a text file (one per line, # comments ignored)."""
+    urls = []
+    for line in Path(urls_file).read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            urls.append(line)
+    if not urls:
+        print(f"Error: no URLs found in {urls_file}")
+        sys.exit(1)
+    return urls
+
+
+def batch_test(urls_file: str, prompts_dir: str, config: dict) -> None:
+    """Batch test: for each paper × each prompt variant, generate short+long scripts and save to Notion."""
+    from notion.writer import NotionWriter
+
+    urls = load_urls(urls_file)
+    variants = load_prompt_variants(prompts_dir)
+    notion_cfg = config.get("notion", {})
+
+    if not notion_cfg.get("parent_page_id"):
+        print("Error: notion config required for batch test")
+        sys.exit(1)
+
+    writer = NotionWriter(
+        token=notion_cfg["token"],
+        parent_page_id=notion_cfg["parent_page_id"],
+    )
+
+    llm_cfg = config["llm"]
+    generator = ScriptGenerator(
+        base_url=llm_cfg["base_url"],
+        api_key=llm_cfg["api_key"],
+        model=llm_cfg["model"],
+    )
+
+    total = len(urls)
+    print(f"Batch test: {total} papers × {len(variants)} prompt variants")
+    print(f"Prompt variants: {', '.join(name for name, _ in variants)}")
+    print()
+
+    for i, url in enumerate(urls, 1):
+        print(f"=== Paper {i}/{total}: {url} ===")
+
+        # Fetch content once per paper
+        source_type = detect_source(url)
+        print(f"  [1] Fetching content ({source_type})...")
+        result = fetch_content(url, source_type, config)
+        print(f"  Title: {result.title}")
+        print(f"  Content length: {len(result.content)} chars")
+
+        # Generate scripts for each prompt variant
+        variant_results = []
+        for j, (name, template) in enumerate(variants, 1):
+            print(f"  [2] Generating scripts with prompt: {name} ({j}/{len(variants)})...")
+            scripts = generator.generate_with_template(result.content, template)
+            print(f"      Short: {len(scripts.short)} chars, Long: {len(scripts.long)} chars")
+            variant_results.append({
+                "name": name,
+                "short": scripts.short,
+                "long": scripts.long,
+            })
+
+        # Save all variants to one Notion page
+        print(f"  [3] Saving to Notion...")
+        page_url = writer.save_batch_comparison(
+            title=result.title,
+            source_url=url,
+            variants=variant_results,
+        )
+        print(f"  Notion page: {page_url}")
+        print()
+
+    print(f"Done! {total} papers processed.")
 
 
 def list_episodes(config: dict) -> None:
@@ -180,12 +320,19 @@ def main():
     parser.add_argument("url", nargs="?", help="URL to convert to podcast")
     parser.add_argument("--config", default="config.yaml", help="Config file path")
     parser.add_argument("--list", action="store_true", help="List all episodes")
+    parser.add_argument("--test", action="store_true", help="Test mode: only generate scripts and save to Notion")
+    parser.add_argument("--batch", metavar="URLS_FILE", help="Batch test: provide a file with URLs (one per line)")
+    parser.add_argument("--prompts", default="./prompt_variants", help="Directory of prompt .md files (for --batch)")
     args = parser.parse_args()
 
     config = load_config(args.config)
 
     if args.list:
         list_episodes(config)
+    elif args.batch:
+        batch_test(args.batch, args.prompts, config)
+    elif args.url and args.test:
+        test_scripts(args.url, config)
     elif args.url:
         generate_episode(args.url, config)
     else:

@@ -101,6 +101,84 @@ class NotionWriter:
     def _divider(self) -> dict:
         return {"object": "block", "type": "divider", "divider": {}}
 
+    def save_batch_comparison(
+        self,
+        title: str,
+        source_url: str,
+        variants: list[dict],
+    ) -> str:
+        """Create a Notion page comparing multiple prompt variants for one paper.
+
+        Args:
+            title: Paper title.
+            source_url: Source URL.
+            variants: List of dicts with keys: name, short, long.
+
+        Returns:
+            The Notion page URL.
+        """
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        page_title = f"[{now}] {title}"
+
+        blocks = []
+        blocks.append(self._heading2("信息"))
+        blocks.append(self._paragraph(f"来源链接：{source_url}"))
+        blocks.append(self._paragraph(f"Prompt 变体数：{len(variants)}"))
+        blocks.append(self._divider())
+
+        for v in variants:
+            blocks.append(self._heading1(f"📌 {v['name']}"))
+            blocks.append(self._heading2(f"短稿（{v['name']}）"))
+            blocks.extend(self._text_blocks(v["short"]))
+            blocks.append(self._heading2(f"长稿（{v['name']}）"))
+            blocks.extend(self._text_blocks(v["long"]))
+            blocks.append(self._divider())
+
+        # Notion API limits: max 100 blocks per request, append rest in batches
+        page_id = self._create_page(page_title, blocks[:100])
+        for i in range(100, len(blocks), 100):
+            self._append_blocks(page_id, blocks[i : i + 100])
+
+        return f"https://www.notion.so/{page_id.replace('-', '')}"
+
+    def _create_page(self, title: str, children: list[dict]) -> str:
+        payload = {
+            "parent": {"page_id": self.parent_page_id},
+            "properties": {
+                "title": {
+                    "title": [{"text": {"content": title}}]
+                }
+            },
+            "children": children,
+        }
+        resp = requests.post(
+            f"{self.API_BASE}/pages",
+            headers=self.headers,
+            json=payload,
+            timeout=30,
+        )
+        resp.raise_for_status()
+        return resp.json()["id"]
+
+    def _append_blocks(self, page_id: str, children: list[dict]) -> None:
+        payload = {"children": children}
+        resp = requests.patch(
+            f"{self.API_BASE}/blocks/{page_id}/children",
+            headers=self.headers,
+            json=payload,
+            timeout=30,
+        )
+        resp.raise_for_status()
+
+    def _heading1(self, text: str) -> dict:
+        return {
+            "object": "block",
+            "type": "heading_1",
+            "heading_1": {
+                "rich_text": [{"type": "text", "text": {"content": text}}]
+            },
+        }
+
     def _text_blocks(self, text: str) -> list[dict]:
         """Split long text into paragraph blocks (Notion limits rich_text to 2000 chars)."""
         blocks = []
