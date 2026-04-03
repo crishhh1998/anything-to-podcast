@@ -16,5 +16,14 @@
     "source_url": "https://arxiv.org/pdf/2401.08740",
     "pub_date": "2026-04-03T07:52:05.287712+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155113_SiT_重设计生成路径_超越DiT_chapters.json"
+  },
+  {
+    "title": "SiT：重构扩散路径，全面超越DiT",
+    "description": "这期聊 SiT 如何在不改 DiT 骨干和参数量的前提下，把扩散模型里的路径、目标函数和采样方式拆开重做。论文发现学 velocity 比学 score 更稳，Linear 和 GVP 路径也比传统 VP 更好优化，推理时甚至还能单独调采样噪声继续提性能。在 ImageNet 256×256 和 512×512 上，SiT 都稳定优于 DiT，说明它不只是刷分，而是在统一 flow 与 diffusion 的设计空间。\n\n00:00 背景与动机\n02:00 方法拆解\n06:00 实验结果解读\n11:50 图表导读\n13:26 评价与讨论\n15:27 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2401.08740",
+    "filename": "20260403_155117_SiT_重构扩散路径_全面超越DiT.mp3",
+    "file_size": 16394744,
+    "source_url": "https://arxiv.org/pdf/2401.08740",
+    "pub_date": "2026-04-03T07:52:18.709414+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json"
   }
 ]
