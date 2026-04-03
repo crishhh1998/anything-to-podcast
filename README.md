@@ -96,6 +96,52 @@ URL → 内容抓取 → LLM 生成短稿+长稿 → Edge TTS 语音合成 → O
 - 论文/技术报告：贴近原文，保持学术准确性
 - Reddit/Twitter：适当拓展背景知识和分析
 
+## 项目结构
+
+```
+anything-to-podcast/
+├── main.py                     # CLI 入口，编排整条 pipeline
+├── manage.sh                   # 快捷命令封装（add/list/delete/prompts）
+├── config.example.yaml         # 配置模板
+├── config.yaml                 # 实际配置（gitignored，含 API 密钥）
+├── pyproject.toml              # Python 项目元数据与依赖
+│
+├── fetchers/                   # 内容抓取模块
+│   ├── base.py                 #   FetchResult 数据类 + BaseFetcher 基类
+│   ├── arxiv_fetcher.py        #   arXiv 论文抓取（下载 PDF → 提取文本）
+│   ├── pdf_fetcher.py          #   通用 PDF / 本地文件抓取
+│   ├── reddit_fetcher.py       #   Reddit 帖子 + 评论抓取
+│   └── twitter_fetcher.py      #   X/Twitter 推文抓取（依赖 yt-dlp + cookies）
+│
+├── processor/                  # LLM 脚本生成模块
+│   ├── prompts.py              #   内置 prompt 模板（按来源类型 × 长短）
+│   └── script_generator.py     #   调用 LLM 生成短稿 + 长稿
+│
+├── prompt_variants/            # 自定义 prompt 变体（每个 .md 文件一种风格）
+│   ├── v1_学术严谨.md
+│   └── v2_结构化深度解析.md
+│
+├── tts/                        # 语音合成模块
+│   └── edge_tts_engine.py      #   Edge TTS → ffmpeg 转码为标准 MP3
+│
+├── storage/                    # 存储模块
+│   └── oss_uploader.py         #   阿里云 OSS 上传/删除
+│
+├── notion/                     # Notion 集成模块
+│   └── writer.py               #   将稿件写入 Notion 子页面
+│
+├── feed/                       # RSS Feed 模块
+│   └── rss_generator.py        #   维护 episodes.json + 生成 feed.xml
+│
+├── docs/                       # GitHub Pages 发布目录
+│   ├── feed.xml                #   RSS Feed 文件
+│   ├── episodes.json           #   播客期数据库
+│   └── cover.jpg               #   播客封面图
+│
+├── server.py                   # 本地开发用 HTTP 服务器
+└── publish.sh                  # 手动发布脚本（git push）
+```
+
 ## 订阅
 
 iPhone 上打开 Apple Podcasts → 资料库 → 右上角 ··· → 通过 URL 关注节目：
