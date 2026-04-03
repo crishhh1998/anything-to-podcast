@@ -81,5 +81,15 @@
     "pub_date": "2026-04-03T11:53:25.486867+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_195210_Self_Forcing_让视频扩散按推理方式训练_chapters.json",
     "duration_seconds": 1030.680069
+  },
+  {
+    "title": "VAR：按尺度自回归生成图像",
+    "description": "这期聊北大和字节提出的 VAR，核心不是逐 token 生成图像，而是像画画一样从低分辨率到高分辨率逐尺度补全。它在 ImageNet 上首次把视觉自回归路线做到了超越 diffusion transformer，FID、速度和扩展性都很强。更重要的是，VAR 重新定义了“视觉 GPT”该怎样生成图像，也展现出接近大语言模型的 scaling law 潜力。\n\n00:00 背景与动机\n01:56 方法拆解\n04:50 实验结果深读\n11:32 图表导读\n13:10 评价与讨论\n15:08 延伸与启发\n\nSource: paper | https://arxiv.org/pdf/2404.02905",
+    "filename": "20260403_201943_VAR_按尺度自回归生成图像.mp3",
+    "file_size": 16114015,
+    "source_url": "https://arxiv.org/pdf/2404.02905",
+    "pub_date": "2026-04-03T12:20:57.744928+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_201943_VAR_按尺度自回归生成图像_chapters.json",
+    "duration_seconds": 1005.7447849999999
   }
 ]
