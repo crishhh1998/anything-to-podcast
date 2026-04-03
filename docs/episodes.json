@@ -71,5 +71,15 @@
     "pub_date": "2026-04-03T09:56:40.488269+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_175426_LeWM_从像素稳定学会世界模型_chapters.json",
     "duration_seconds": 958.5600690000001
+  },
+  {
+    "title": "Self Forcing：让视频扩散按推理方式训练",
+    "description": "这期聊 Adobe 和 UT Austin 的 Self Forcing，核心是解决自回归视频扩散里训练看真值、测试吃自己输出造成的 exposure bias。它直接在训练中做 autoregressive self-rollout，用 KV cache 按真实推理流程逐帧生成，再用整段视频的分布匹配损失来约束稳定性和质量。结果是在接近实时的 17 FPS 下，画质和语义都明显超过 CausVid，并在人工偏好上赢过 Wan2.1、SkyReels-V2 和 MAGI-1。\n\n00:00 背景与动机\n02:24 方法拆解\n05:56 实验结果\n12:09 图表导读\n13:41 评价与讨论\n15:33 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2506.08009",
+    "filename": "20260403_195210_Self_Forcing_让视频扩散按推理方式训练.mp3",
+    "file_size": 16512720,
+    "source_url": "https://arxiv.org/pdf/2506.08009",
+    "pub_date": "2026-04-03T11:53:25.486867+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_195210_Self_Forcing_让视频扩散按推理方式训练_chapters.json",
+    "duration_seconds": 1030.680069
   }
 ]
