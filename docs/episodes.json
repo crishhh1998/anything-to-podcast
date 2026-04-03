@@ -43,5 +43,14 @@
     "source_url": "https://arxiv.org/pdf/2510.11690",
     "pub_date": "2026-04-03T08:49:38.161634+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限_chapters.json"
+  },
+  {
+    "title": "DMD：一步蒸馏逼近扩散模型画质",
+    "description": "这期讲一篇来自 MIT 和 Adobe Research 的工作：DMD 不再强行学习复杂采样轨迹，而是直接让一步生成器去匹配教师扩散模型的最终分布。它用“教师真实 score - 学生假样本 score”的分布匹配，再配合回归损失稳住结构和多样性，把一步生成质量大幅拉近原始扩散模型。结果上，它在 ImageNet 和文生图任务里都显著优于其他一步方法，同时带来接近 30 倍到数百倍的推理加速。\n\n00:00 背景与动机\n01:42 方法拆解\n05:02 实验结果解读\n11:40 图表导读\n13:00 评价与讨论\n15:09 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2311.18828",
+    "filename": "20260403_165831_DMD_一步蒸馏逼近扩散模型画质.mp3",
+    "file_size": 16024897,
+    "source_url": "https://arxiv.org/pdf/2311.18828",
+    "pub_date": "2026-04-03T09:01:24.994210+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质_chapters.json"
   }
 ]
