@@ -52,5 +52,14 @@
     "source_url": "https://arxiv.org/pdf/2311.18828",
     "pub_date": "2026-04-03T09:01:24.994210+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质_chapters.json"
+  },
+  {
+    "title": "DMD2：用分布匹配把扩散蒸馏提速到4步",
+    "description": "这期讲 MIT 和 Adobe 提出的 DMD2，如何去掉昂贵的回归蒸馏，用分布匹配加 GAN 监督训练更快的图像生成模型。它通过 TTUR 稳定 fake score、用 backward simulation 解决多步训练和推理不一致，让 SDXL 从近百步采样压到 4 步。更关键的是，DMD2 不只是更快，ImageNet 和 COCO 上的结果甚至能追平或超过教师模型，重新定义了扩散蒸馏怎么做。\n\n00:00 背景与动机\n02:20 方法拆解\n06:37 实验结果深读\n14:08 图表导读\n15:57 评价与讨论\n17:55 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2405.14867",
+    "filename": "20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步.mp3",
+    "file_size": 18886180,
+    "source_url": "https://arxiv.org/pdf/2405.14867",
+    "pub_date": "2026-04-03T09:10:45.727900+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步_chapters.json"
   }
 ]
