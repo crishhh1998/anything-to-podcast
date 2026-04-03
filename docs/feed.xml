@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 07:07:34 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 07:07:38 +0000</lastBuildDate>
     <ns0:author>Anything to Podcast</ns0:author>
     <ns0:category text="Technology" />
     <ns0:explicit>no</ns0:explicit>
@@ -21,14 +21,5 @@
       <ns0:email>noreply@example.com</ns0:email>
     </ns0:owner>
     <ns0:summary>自动生成的播客</ns0:summary>
-    <item>
-      <title>Scaling Text-to-Image Diffusion Transformers with Representation Autoencoders</title>
-      <description>Source: report | 2601.16208v1.pdf
-
-Source: 2601.16208v1.pdf</description>
-      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3" length="14636556" type="audio/mpeg" />
-      <pubDate>Thu, 02 Apr 2026 14:10:12 +0000</pubDate>
-    </item>
   </channel>
 </rss>
