@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-pip install requests pymupdf arxiv edge-tts openai pyyaml feedgen
+pip install requests pymupdf arxiv edge-tts openai pyyaml feedgen oss2
 brew install ffmpeg
 ```
 
@@ -21,13 +21,31 @@ cp config.example.yaml config.yaml
 
 Twitter 需要额外提供 `cookies.txt` 文件（浏览器导出）。
 
+### Notion 配置（可选）
+
+生成的播客稿件可以自动保存到 Notion。在 [Notion Integrations](https://www.notion.so/my-integrations) 创建 integration 获取 token，然后在 `config.yaml` 中添加：
+
+```yaml
+notion:
+  token: "ntn_xxx"
+  parent_page_id: "your-page-id"
+```
+
+并在目标 Notion 页面的 Connections 中添加该 integration。
+
 ## 使用
 
 所有操作通过 `manage.sh` 完成：
 
 ```bash
-# 生成新一期并自动发布
-./manage.sh add <url或本地pdf路径>
+# 生成新一期并自动发布（默认内置 prompt，10 分钟时长）
+./manage.sh add <url>
+
+# 指定 prompt 变体和时长
+./manage.sh add -p 1 -d 15 <url>
+
+# 查看可用的 prompt 变体
+./manage.sh prompts
 
 # 列出所有期
 ./manage.sh list
@@ -36,13 +54,27 @@ Twitter 需要额外提供 `cookies.txt` 文件（浏览器导出）。
 ./manage.sh delete <序号>
 ```
 
+### 选项说明
+
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `-p <编号>` | 指定 prompt 变体编号 | 内置 prompt |
+| `-d <分钟>` | 目标播客时长 | 10 分钟 |
+
+### Prompt 变体
+
+在 `prompt_variants/` 目录下放置 `.md` 文件，每个文件是一个完整的 prompt 模板，用 `{content}` 作为论文内容占位符。运行 `./manage.sh prompts` 查看编号。
+
 ### 示例
 
 ```bash
-# arXiv 论文
+# arXiv 论文（默认）
 ./manage.sh add https://arxiv.org/pdf/2404.02905
 
-# 本地 PDF（技术报告）
+# 用第 2 个 prompt，目标 15 分钟
+./manage.sh add -p 2 -d 15 https://arxiv.org/pdf/2404.02905
+
+# 本地 PDF
 ./manage.sh add ./report.pdf
 
 # Reddit 帖子
@@ -52,6 +84,18 @@ Twitter 需要额外提供 `cookies.txt` 文件（浏览器导出）。
 ./manage.sh add https://x.com/user/status/123456
 ```
 
+## 流程
+
+```
+URL → 内容抓取 → LLM 生成短稿+长稿 → Edge TTS 语音合成 → OSS 上传 → Notion 保存 → RSS Feed 更新 → GitHub Pages 发布
+```
+
+- 每次生成两种稿件：短稿（500-1000 字）和长稿（按指定分钟数）
+- 音频基于长稿合成，上传至阿里云 OSS
+- 稿件自动保存到 Notion（需配置）
+- 论文/技术报告：贴近原文，保持学术准确性
+- Reddit/Twitter：适当拓展背景知识和分析
+
 ## 订阅
 
 iPhone 上打开 Apple Podcasts → 资料库 → 右上角 ··· → 通过 URL 关注节目：
@@ -59,12 +103,3 @@ iPhone 上打开 Apple Podcasts → 资料库 → 右上角 ··· → 通过 UR
 ```
 https://crishhh1998.github.io/anything-to-podcast/feed.xml
 ```
-
-## 架构
-
-```
-URL → 内容抓取 → LLM 生成中文播客脚本 → Edge TTS 语音合成 → MP3 + RSS Feed → GitHub Pages
-```
-
-- 论文/技术报告：贴近原文，保持学术准确性
-- Reddit/Twitter：适当拓展背景知识和分析

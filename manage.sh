@@ -11,13 +11,12 @@ usage() {
     echo "  ./manage.sh prompts                         列出可用的 prompt 变体"
     echo ""
     echo "选项:"
-    echo "  -p, --prompt <name>     指定 prompt 变体名（见 ./manage.sh prompts）"
-    echo "  -d, --duration <分钟>   目标播客时长，默认 10 分钟"
+    echo "  -p <编号>     指定 prompt 变体（见 ./manage.sh prompts）"
+    echo "  -d <分钟>     目标播客时长，默认 10 分钟"
     echo ""
     echo "示例:"
     echo "  ./manage.sh add https://arxiv.org/pdf/2404.02905"
-    echo "  ./manage.sh add -p v2_结构化深度解析 -d 15 https://arxiv.org/pdf/2404.02905"
-    echo "  ./manage.sh add --prompt v1_学术严谨 --duration 5 ./paper.pdf"
+    echo "  ./manage.sh add -p 1 -d 15 https://arxiv.org/pdf/2404.02905"
     echo "  ./manage.sh prompts"
     echo "  ./manage.sh list"
     echo "  ./manage.sh delete 1"
@@ -52,15 +51,17 @@ case "${1}" in
         publish
         ;;
     prompts)
-        echo "可用的 prompt 变体（prompt_variants/ 目录）："
+        echo "可用的 prompt 变体："
         echo ""
-        for f in prompt_variants/*.md; do
-            [ -f "$f" ] || { echo "  （无）"; break; }
+        i=1
+        for f in $(ls prompt_variants/*.md 2>/dev/null | sort); do
             name=$(basename "$f" .md)
-            echo "  $name"
+            echo "  $i. $name"
+            i=$((i+1))
         done
+        [ "$i" -eq 1 ] && echo "  （无）"
         echo ""
-        echo "使用方式: ./manage.sh add -p <name> <url>"
+        echo "使用方式: ./manage.sh add -p 1 <url>"
         ;;
     list)
         python -c "

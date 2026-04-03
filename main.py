@@ -59,24 +59,39 @@ def fetch_content(url: str, source_type: str, config: dict) -> FetchResult:
         return PdfFetcher().fetch(url)
 
 
-def resolve_prompt_file(prompt_name: str | None, prompts_dir: str = "./prompt_variants") -> str | None:
-    """Resolve a prompt name to a .md file path. Returns None if no prompt specified."""
-    if not prompt_name:
+def list_prompts(prompts_dir: str = "./prompt_variants") -> list[Path]:
+    """List available prompt variant files, sorted by name."""
+    return sorted(Path(prompts_dir).glob("*.md"))
+
+
+def resolve_prompt_file(prompt_arg: str | None, prompts_dir: str = "./prompt_variants") -> str | None:
+    """Resolve a prompt argument to a .md file path.
+
+    Accepts: number (e.g. "1", "2"), full name, or file path.
+    """
+    if not prompt_arg:
         return None
+    prompts = list_prompts(prompts_dir)
+    # By number
+    if prompt_arg.isdigit():
+        idx = int(prompt_arg) - 1
+        if 0 <= idx < len(prompts):
+            return str(prompts[idx])
+        print(f"Error: prompt #{prompt_arg} not found, only {len(prompts)} available")
+        for i, p in enumerate(prompts, 1):
+            print(f"  {i}. {p.stem}")
+        sys.exit(1)
     # Direct file path
-    path = Path(prompt_name)
+    path = Path(prompt_arg)
     if path.is_file():
         return str(path)
-    # Search in prompts_dir by stem name
-    for md_file in Path(prompts_dir).glob("*.md"):
-        if md_file.stem == prompt_name:
+    # By name match
+    for md_file in prompts:
+        if prompt_arg in md_file.stem:
             return str(md_file)
-    # Try partial match
-    for md_file in Path(prompts_dir).glob("*.md"):
-        if prompt_name in md_file.stem:
-            return str(md_file)
-    print(f"Error: prompt '{prompt_name}' not found in {prompts_dir}")
-    print(f"Available prompts: {', '.join(p.stem for p in sorted(Path(prompts_dir).glob('*.md')))}")
+    print(f"Error: prompt '{prompt_arg}' not found")
+    for i, p in enumerate(prompts, 1):
+        print(f"  {i}. {p.stem}")
     sys.exit(1)
 
 
