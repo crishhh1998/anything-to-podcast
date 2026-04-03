@@ -7,5 +7,14 @@
     "source_url": "https://arxiv.org/pdf/2212.09748",
     "pub_date": "2026-04-03T07:26:20.035094+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成_chapters.json"
+  },
+  {
+    "title": "SiT：重设计生成路径，超越DiT",
+    "description": "这期聊一篇很扎实的工作：在完全不改 DiT 骨干的前提下，只重设计生成路径、训练目标和采样方式，就把 ImageNet 生成效果系统性做得更好。论文用 stochastic interpolant 把 flow matching、diffusion 和 interpolant 统一到同一框架里，核心结论是：比起一味堆更大 Transformer，“路径怎么走、学什么、怎么采样”可能更重要。我们会重点讲清楚为什么学 velocity 往往比学 score 更自然，为什么 Linear/GVP 路径和 SDE 采样更强，以及这些发现对未来生成模型意味着什么。\n\n00:00 背景与动机\n02:14 方法拆解\n05:33 实验深读\n12:12 图表导读\n13:43 评价与讨论\n15:49 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2401.08740",
+    "filename": "20260403_155113_SiT_重设计生成路径_超越DiT.mp3",
+    "file_size": 16556649,
+    "source_url": "https://arxiv.org/pdf/2401.08740",
+    "pub_date": "2026-04-03T07:52:05.287712+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155113_SiT_重设计生成路径_超越DiT_chapters.json"
   }
 ]
