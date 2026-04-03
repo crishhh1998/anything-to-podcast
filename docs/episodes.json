@@ -46,14 +46,5 @@
     "file_size": 18453579,
     "source_url": "https://arxiv.org/pdf/2603.19312",
     "pub_date": "2026-04-03T06:43:34.819804+00:00"
-  },
-  {
-    "title": "LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels",
-    "description": "Source: paper | https://arxiv.org/pdf/2603.19312\n\n00:00 背景与动机\n02:26 方法拆解\n05:44 实验结果解读\n12:04 图表导读\n13:54 评价与讨论\n16:00 延伸思考",
-    "filename": "20260403_144857_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3",
-    "file_size": 17172507,
-    "source_url": "https://arxiv.org/pdf/2603.19312",
-    "pub_date": "2026-04-03T06:50:05.483752+00:00",
-    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144857_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr_chapters.json"
   }
 ]
