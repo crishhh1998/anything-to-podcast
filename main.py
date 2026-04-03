@@ -59,7 +59,29 @@ def fetch_content(url: str, source_type: str, config: dict) -> FetchResult:
         return PdfFetcher().fetch(url)
 
 
-def generate_episode(url: str, config: dict) -> None:
+def resolve_prompt_file(prompt_name: str | None, prompts_dir: str = "./prompt_variants") -> str | None:
+    """Resolve a prompt name to a .md file path. Returns None if no prompt specified."""
+    if not prompt_name:
+        return None
+    # Direct file path
+    path = Path(prompt_name)
+    if path.is_file():
+        return str(path)
+    # Search in prompts_dir by stem name
+    for md_file in Path(prompts_dir).glob("*.md"):
+        if md_file.stem == prompt_name:
+            return str(md_file)
+    # Try partial match
+    for md_file in Path(prompts_dir).glob("*.md"):
+        if prompt_name in md_file.stem:
+            return str(md_file)
+    print(f"Error: prompt '{prompt_name}' not found in {prompts_dir}")
+    print(f"Available prompts: {', '.join(p.stem for p in sorted(Path(prompts_dir).glob('*.md')))}")
+    sys.exit(1)
+
+
+def generate_episode(url: str, config: dict, prompt_file: str | None = None,
+                     duration: int = 10) -> None:
     """Full pipeline: fetch → script → TTS → RSS."""
     output_dir = config.get("output_dir", "./output")
     episodes_dir = str(Path(output_dir) / "episodes")
@@ -72,14 +94,15 @@ def generate_episode(url: str, config: dict) -> None:
     print(f"  Content length: {len(result.content)} chars")
 
     # Step 2: Generate podcast scripts (short + long) via LLM
-    print("[2/6] Generating podcast scripts (short + long)...")
+    prompt_label = Path(prompt_file).stem if prompt_file else "built-in"
+    print(f"[2/6] Generating podcast scripts (prompt: {prompt_label}, duration: {duration}min)...")
     llm_cfg = config["llm"]
     generator = ScriptGenerator(
         base_url=llm_cfg["base_url"],
         api_key=llm_cfg["api_key"],
         model=llm_cfg["model"],
     )
-    scripts = generator.generate(result)
+    scripts = generator.generate(result, duration=duration, prompt_file=prompt_file)
     print(f"  Short script: {len(scripts.short)} chars")
     print(f"  Long script: {len(scripts.long)} chars")
 
@@ -180,6 +203,8 @@ def main():
     parser.add_argument("url", nargs="?", help="URL to convert to podcast")
     parser.add_argument("--config", default="config.yaml", help="Config file path")
     parser.add_argument("--list", action="store_true", help="List all episodes")
+    parser.add_argument("--prompt", metavar="NAME", help="Prompt variant name or .md file path (from prompt_variants/)")
+    parser.add_argument("--duration", type=int, default=10, help="Target duration in minutes for long script (default: 10)")
     args = parser.parse_args()
 
     config = load_config(args.config)
@@ -187,7 +212,8 @@ def main():
     if args.list:
         list_episodes(config)
     elif args.url:
-        generate_episode(args.url, config)
+        prompt_file = resolve_prompt_file(args.prompt)
+        generate_episode(args.url, config, prompt_file=prompt_file, duration=args.duration)
     else:
         parser.print_help()
         sys.exit(1)

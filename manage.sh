@@ -5,13 +5,20 @@ cd "$(dirname "$0")"
 
 usage() {
     echo "用法:"
-    echo "  ./manage.sh add <url或本地pdf路径>   生成并发布新一期"
-    echo "  ./manage.sh list                     列出所有期"
-    echo "  ./manage.sh delete <序号>            删除某一期"
+    echo "  ./manage.sh add [选项] <url或本地pdf路径>   生成并发布新一期"
+    echo "  ./manage.sh list                            列出所有期"
+    echo "  ./manage.sh delete <序号>                   删除某一期"
+    echo "  ./manage.sh prompts                         列出可用的 prompt 变体"
+    echo ""
+    echo "选项:"
+    echo "  -p, --prompt <name>     指定 prompt 变体名（见 ./manage.sh prompts）"
+    echo "  -d, --duration <分钟>   目标播客时长，默认 10 分钟"
     echo ""
     echo "示例:"
     echo "  ./manage.sh add https://arxiv.org/pdf/2404.02905"
-    echo "  ./manage.sh add ./paper.pdf"
+    echo "  ./manage.sh add -p v2_结构化深度解析 -d 15 https://arxiv.org/pdf/2404.02905"
+    echo "  ./manage.sh add --prompt v1_学术严谨 --duration 5 ./paper.pdf"
+    echo "  ./manage.sh prompts"
     echo "  ./manage.sh list"
     echo "  ./manage.sh delete 1"
 }
@@ -26,9 +33,34 @@ publish() {
 
 case "${1}" in
     add)
-        [ -z "$2" ] && echo "请提供 URL 或文件路径" && exit 1
-        python main.py "$2"
+        shift
+        PROMPT_ARGS=""
+        DURATION_ARGS=""
+        URL=""
+        while [ $# -gt 0 ]; do
+            case "$1" in
+                -p|--prompt)
+                    PROMPT_ARGS="--prompt $2"; shift 2 ;;
+                -d|--duration)
+                    DURATION_ARGS="--duration $2"; shift 2 ;;
+                *)
+                    URL="$1"; shift ;;
+            esac
+        done
+        [ -z "$URL" ] && echo "请提供 URL 或文件路径" && exit 1
+        python main.py $PROMPT_ARGS $DURATION_ARGS "$URL"
         publish
+        ;;
+    prompts)
+        echo "可用的 prompt 变体（prompt_variants/ 目录）："
+        echo ""
+        for f in prompt_variants/*.md; do
+            [ -f "$f" ] || { echo "  （无）"; break; }
+            name=$(basename "$f" .md)
+            echo "  $name"
+        done
+        echo ""
+        echo "使用方式: ./manage.sh add -p <name> <url>"
         ;;
     list)
         python -c "
