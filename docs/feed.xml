@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:ns0="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0" xmlns:podcast="https://podcastindex.org/namespace/1.0">
   <channel>
     <title>Anything to Podcast</title>
     <link>https://crishhh1998.github.io/anything-to-podcast</link>
@@ -12,31 +12,31 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 03 Apr 2026 06:43:34 +0000</lastBuildDate>
-    <itunes:author>Anything to Podcast</itunes:author>
-    <itunes:category text="Technology"/>
-    <itunes:explicit>no</itunes:explicit>
-    <itunes:owner>
-      <itunes:name>Anything to Podcast</itunes:name>
-      <itunes:email>noreply@example.com</itunes:email>
-    </itunes:owner>
-    <itunes:summary>自动生成的播客</itunes:summary>
+    <lastBuildDate>Fri, 03 Apr 2026 06:50:05 +0000</lastBuildDate>
+    <ns0:author>Anything to Podcast</ns0:author>
+    <ns0:category text="Technology" />
+    <ns0:explicit>no</ns0:explicit>
+    <ns0:owner>
+      <ns0:name>Anything to Podcast</ns0:name>
+      <ns0:email>noreply@example.com</ns0:email>
+    </ns0:owner>
+    <ns0:summary>自动生成的播客</ns0:summary>
     <item>
       <title>Scaling Text-to-Image Diffusion Transformers with Representation Autoencoders</title>
       <description>Source: report | 2601.16208v1.pdf
 
 Source: 2601.16208v1.pdf</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3" length="14636556" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3" length="14636556" type="audio/mpeg" />
       <pubDate>Thu, 02 Apr 2026 14:10:12 +0000</pubDate>
-    </item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144857_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>Self Forcing: Bridging the Train-Test Gap in Autoregressive Video Diffusion</title>
       <description>Source: paper | https://arxiv.org/pdf/2506.08009v1
 
 Source: https://arxiv.org/pdf/2506.08009v1</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_125941_Self_Forcing__Bridging_the_Train-Test_Gap_in_Autor.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_125941_Self_Forcing__Bridging_the_Train-Test_Gap_in_Autor.mp3" length="15761284" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_125941_Self_Forcing__Bridging_the_Train-Test_Gap_in_Autor.mp3" length="15761284" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 05:00:28 +0000</pubDate>
     </item>
     <item>
@@ -45,7 +45,7 @@ Source: https://arxiv.org/pdf/2506.08009v1</description>
 
 Source: https://arxiv.org/pdf/2311.18828</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_132952_One-step_Diffusion_with_Distribution_Matching_Dist.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_132952_One-step_Diffusion_with_Distribution_Matching_Dist.mp3" length="7282982" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_132952_One-step_Diffusion_with_Distribution_Matching_Dist.mp3" length="7282982" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 05:30:20 +0000</pubDate>
     </item>
     <item>
@@ -54,7 +54,7 @@ Source: https://arxiv.org/pdf/2311.18828</description>
 
 Source: https://arxiv.org/pdf/2603.06507</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_134917_Self-Supervised_Flow_Matching_for_Scalable_Multi-M.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_134917_Self-Supervised_Flow_Matching_for_Scalable_Multi-M.mp3" length="13771381" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_134917_Self-Supervised_Flow_Matching_for_Scalable_Multi-M.mp3" length="13771381" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 05:50:10 +0000</pubDate>
     </item>
     <item>
@@ -70,7 +70,7 @@ Source: https://arxiv.org/pdf/2603.06507</description>
 
 Source: https://arxiv.org/pdf/2603.19312</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_143354_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_143354_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3" length="18371437" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_143354_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3" length="18371437" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 06:34:52 +0000</pubDate>
     </item>
     <item>
@@ -86,8 +86,24 @@ Source: https://arxiv.org/pdf/2603.19312</description>
 
 Source: https://arxiv.org/pdf/2603.19312</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144232_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3</guid>
-      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144232_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3" length="18453579" type="audio/mpeg"/>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144232_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3" length="18453579" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 06:43:34 +0000</pubDate>
+    </item>
+    <item>
+      <title>LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels</title>
+      <description>Source: paper | https://arxiv.org/pdf/2603.19312
+
+00:00 背景与动机
+02:26 方法拆解
+05:44 实验结果解读
+12:04 图表导读
+13:54 评价与讨论
+16:00 延伸思考
+
+Source: https://arxiv.org/pdf/2603.19312</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144857_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_144857_LeWorldModel__Stable_End-to-End_Joint-Embedding_Pr.mp3" length="17172507" type="audio/mpeg" />
+      <pubDate>Fri, 03 Apr 2026 06:50:05 +0000</pubDate>
     </item>
   </channel>
 </rss>
