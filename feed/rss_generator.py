@@ -2,11 +2,13 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+from xml.etree.ElementTree import SubElement
 
 from feedgen.feed import FeedGenerator
 
 
 EPISODES_DB = "episodes.json"
+PODCAST_NS = "https://podcastindex.org/namespace/1.0"
 
 
 class RSSGenerator:
@@ -19,7 +21,9 @@ class RSSGenerator:
         self.output_dir = output_dir
         self.db_path = str(Path(output_dir) / EPISODES_DB)
 
-    def add_episode(self, title: str, description: str, source_url: str, audio_filename: str = "", file_size: int = 0, audio_path: str = "") -> None:
+    def add_episode(self, title: str, description: str, source_url: str,
+                    audio_filename: str = "", file_size: int = 0,
+                    audio_path: str = "", chapters_url: str = "") -> None:
         episodes = self._load_episodes()
 
         if audio_path and not audio_filename:
@@ -35,6 +39,7 @@ class RSSGenerator:
             "file_size": file_size,
             "source_url": source_url,
             "pub_date": datetime.now(timezone.utc).isoformat(),
+            "chapters_url": chapters_url,
         }
 
         episodes.append(episode)
@@ -67,8 +72,49 @@ class RSSGenerator:
             fe.enclosure(audio_url, str(ep["file_size"]), "audio/mpeg")
             fe.guid(audio_url, permalink=True)
 
+        # Generate the base RSS XML
         feed_path = str(Path(self.output_dir) / "feed.xml")
         fg.rss_file(feed_path, pretty=True)
+
+        # Inject podcast:chapters namespace and tags
+        self._inject_chapters(feed_path, episodes)
+
+    def _inject_chapters(self, feed_path: str, episodes: list[dict]) -> None:
+        """Add <podcast:chapters> tags to the RSS XML.
+
+        feedgen doesn't support the podcast 2.0 namespace natively,
+        so we inject it via ElementTree post-processing.
+        """
+        import xml.etree.ElementTree as ET
+
+        ET.register_namespace("podcast", PODCAST_NS)
+        tree = ET.parse(feed_path)
+        root = tree.getroot()
+
+        # Add namespace to <rss> tag
+        rss = root if root.tag == "rss" else root.find("rss")
+        if rss is not None:
+            rss.set(f"xmlns:podcast", PODCAST_NS)
+
+        channel = root.find("channel") if root.tag == "rss" else root.find(".//channel")
+        if channel is None:
+            return
+
+        items = channel.findall("item")
+        # episodes are reversed in feed, so reversed episodes match items order
+        reversed_episodes = list(reversed(episodes))
+
+        for i, item in enumerate(items):
+            if i >= len(reversed_episodes):
+                break
+            ep = reversed_episodes[i]
+            chapters_url = ep.get("chapters_url", "")
+            if chapters_url:
+                ch_elem = SubElement(item, f"{{{PODCAST_NS}}}chapters")
+                ch_elem.set("url", chapters_url)
+                ch_elem.set("type", "application/json+chapters")
+
+        tree.write(feed_path, encoding="unicode", xml_declaration=True)
 
     def _load_episodes(self) -> list[dict]:
         if Path(self.db_path).exists():

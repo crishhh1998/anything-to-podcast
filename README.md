@@ -5,7 +5,7 @@
 ## 安装
 
 ```bash
-pip install requests pymupdf arxiv edge-tts openai pyyaml feedgen oss2
+pip install requests pymupdf arxiv edge-tts openai pyyaml feedgen oss2 mutagen
 brew install ffmpeg
 ```
 
@@ -91,6 +91,7 @@ URL → 内容抓取 → LLM 生成短稿+长稿 → Edge TTS 语音合成 → O
 ```
 
 - 每次生成两种稿件：短稿（500-1000 字）和长稿（按指定分钟数）
+- 长稿自动生成章节标记，音频内嵌章节跳转（ID3 + Podcasting 2.0）
 - 音频基于长稿合成，上传至阿里云 OSS
 - 稿件自动保存到 Notion（需配置）
 - 论文/技术报告：贴近原文，保持学术准确性
@@ -119,10 +120,11 @@ anything-to-podcast/
 │
 ├── prompt_variants/            # 自定义 prompt 变体（每个 .md 文件一种风格）
 │   ├── v1_学术严谨.md
-│   └── v2_结构化深度解析.md
+│   ├── v2_结构化深度解析.md
+│   └── v3_实验详解.md
 │
 ├── tts/                        # 语音合成模块
-│   └── edge_tts_engine.py      #   Edge TTS → ffmpeg 转码为标准 MP3
+│   └── edge_tts_engine.py      #   Edge TTS → 分章节合成 → ffmpeg 转码 → ID3 章节标记
 │
 ├── storage/                    # 存储模块
 │   └── oss_uploader.py         #   阿里云 OSS 上传/删除

@@ -2,7 +2,9 @@
 """Anything to Podcast - Convert URLs to Chinese podcast episodes."""
 
 import argparse
+import json
 import sys
+import tempfile
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -128,8 +130,14 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
         voice=tts_cfg.get("voice", "zh-CN-XiaoxiaoNeural"),
         rate=tts_cfg.get("rate", "+0%"),
     )
-    audio_path = engine.synthesize(scripts.long, result.title, episodes_dir)
+    tts_result = engine.synthesize(scripts.long, result.title, episodes_dir)
+    audio_path = tts_result.audio_path
     print(f"  Audio saved: {audio_path}")
+    if tts_result.chapters:
+        print(f"  Chapters: {len(tts_result.chapters)}")
+        for ch in tts_result.chapters:
+            m, s = divmod(int(ch.start_seconds), 60)
+            print(f"    {m:02d}:{s:02d} {ch.title}")
 
     # Step 4: Upload to OSS
     print("[4/6] Uploading to OSS...")
@@ -145,6 +153,24 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
     audio_size = Path(audio_path).stat().st_size
     audio_url = uploader.upload(audio_path, f"episodes/{filename}")
     print(f"  OSS URL: {audio_url}")
+
+    # Upload chapters JSON to OSS if chapters exist
+    chapters_url = ""
+    if tts_result.chapters:
+        chapters_json = {
+            "version": "1.2.0",
+            "chapters": [
+                {"startTime": round(ch.start_seconds, 1), "title": ch.title}
+                for ch in tts_result.chapters
+            ],
+        }
+        chapters_filename = Path(filename).stem + "_chapters.json"
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+            json.dump(chapters_json, f, ensure_ascii=False)
+            chapters_tmp = f.name
+        chapters_url = uploader.upload(chapters_tmp, f"episodes/{chapters_filename}")
+        Path(chapters_tmp).unlink(missing_ok=True)
+        print(f"  Chapters JSON: {chapters_url}")
 
     # Remove local MP3 from docs/episodes (no longer needed in git)
     Path(audio_path).unlink(missing_ok=True)
@@ -180,12 +206,23 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
         output_dir=output_dir,
         audio_base_url=oss_cfg["base_url"],
     )
+    # Build description with chapter timestamps
+    desc_parts = [f"Source: {result.source_type} | {result.url}"]
+    if tts_result.chapters:
+        desc_parts.append("")
+        for ch in tts_result.chapters:
+            m, s = divmod(int(ch.start_seconds), 60)
+            h, m = divmod(m, 60)
+            ts = f"{h:02d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
+            desc_parts.append(f"{ts} {ch.title}")
+
     rss.add_episode(
         title=result.title,
-        description=f"Source: {result.source_type} | {result.url}",
+        description="\n".join(desc_parts),
         audio_filename=filename,
         file_size=audio_size,
         source_url=url,
+        chapters_url=chapters_url,
     )
     print("Done! Episode added to feed.")
 

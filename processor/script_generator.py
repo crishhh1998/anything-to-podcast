@@ -9,6 +9,8 @@ from .prompts import get_prompt
 # 中文朗读速度约 300 字/分钟
 CHARS_PER_MINUTE = 300
 
+CHAPTER_INSTRUCTION = "在每个内容板块的开头，用 [CHAPTER: 章节标题] 标记（如 [CHAPTER: 背景与动机]），标题简短有概括性。除此标记外不要使用其他格式符号。"
+
 
 @dataclass
 class ScriptResult:
@@ -46,7 +48,7 @@ class ScriptGenerator:
             )
             lo, hi = duration_to_chars(duration)
             long_script = self._call_llm_raw(
-                base_prompt + f"\n\n请将以上内容控制在 {lo}-{hi} 字（约 {duration} 分钟朗读时长）。"
+                base_prompt + f"\n\n请将以上内容控制在 {lo}-{hi} 字（约 {duration} 分钟朗读时长）。{CHAPTER_INSTRUCTION}"
             )
         else:
             short_script = self._call_llm_builtin(fetch_result, "short")
