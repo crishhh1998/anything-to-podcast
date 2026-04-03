@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 02 Apr 2026 14:10:12 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Apr 2026 05:00:28 +0000</lastBuildDate>
     <itunes:author>Anything to Podcast</itunes:author>
     <itunes:category text="Technology"/>
     <itunes:explicit>no</itunes:explicit>
@@ -38,6 +38,15 @@ Source: 2601.16208v1.pdf</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260402_220917_Scaling_Text-to-Image_Diffusion_Transformers_with_.mp3" length="14636556" type="audio/mpeg"/>
       <pubDate>Thu, 02 Apr 2026 14:10:12 +0000</pubDate>
+    </item>
+    <item>
+      <title>Self Forcing: Bridging the Train-Test Gap in Autoregressive Video Diffusion</title>
+      <description>Source: paper | https://arxiv.org/pdf/2506.08009v1
+
+Source: https://arxiv.org/pdf/2506.08009v1</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_125941_Self_Forcing__Bridging_the_Train-Test_Gap_in_Autor.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_125941_Self_Forcing__Bridging_the_Train-Test_Gap_in_Autor.mp3" length="15761284" type="audio/mpeg"/>
+      <pubDate>Fri, 03 Apr 2026 05:00:28 +0000</pubDate>
     </item>
   </channel>
 </rss>
