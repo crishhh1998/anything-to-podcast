@@ -1,5 +1,6 @@
 import re
 import tempfile
+import time
 from pathlib import Path
 
 import arxiv
@@ -12,8 +13,7 @@ from .base import BaseFetcher, FetchResult
 class ArxivFetcher(BaseFetcher):
     def fetch(self, url: str) -> FetchResult:
         arxiv_id = self._extract_id(url)
-        search = arxiv.Search(id_list=[arxiv_id])
-        paper = next(arxiv.Client().results(search))
+        paper = self._fetch_metadata(arxiv_id)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             pdf_path = self._download_pdf(arxiv_id, tmp_dir)
@@ -37,6 +37,18 @@ class ArxivFetcher(BaseFetcher):
             return match.group(1)
         raise ValueError(f"Cannot extract arXiv ID from: {url}")
 
+    def _fetch_metadata(self, arxiv_id: str):
+        """Fetch paper metadata from arXiv API with retries."""
+        search = arxiv.Search(id_list=[arxiv_id])
+        for attempt in range(3):
+            try:
+                return next(arxiv.Client().results(search))
+            except Exception:
+                if attempt == 2:
+                    raise
+                print(f"  arXiv metadata fetch failed, retrying ({attempt + 1}/3)...")
+                time.sleep(3 * (attempt + 1))
+
     def _download_pdf(self, arxiv_id: str, tmp_dir: str) -> str:
         pdf_url = f"https://arxiv.org/pdf/{arxiv_id}"
         for attempt in range(3):
@@ -49,8 +61,8 @@ class ArxivFetcher(BaseFetcher):
             except requests.RequestException:
                 if attempt == 2:
                     raise
-                import time
-                time.sleep(3)
+                print(f"  PDF download failed, retrying ({attempt + 1}/3)...")
+                time.sleep(3 * (attempt + 1))
         pdf_path = str(Path(tmp_dir) / f"{arxiv_id.replace('/', '_')}.pdf")
         with open(pdf_path, "wb") as f:
             for chunk in resp.iter_content(chunk_size=8192):

@@ -1,4 +1,5 @@
 import tempfile
+import time
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -10,10 +11,18 @@ from .base import BaseFetcher, FetchResult
 
 class PdfFetcher(BaseFetcher):
     def fetch(self, url: str) -> FetchResult:
-        resp = requests.get(url, timeout=60, headers={
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
-        })
-        resp.raise_for_status()
+        for attempt in range(3):
+            try:
+                resp = requests.get(url, timeout=120, headers={
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+                })
+                resp.raise_for_status()
+                break
+            except requests.RequestException:
+                if attempt == 2:
+                    raise
+                print(f"  PDF download failed, retrying ({attempt + 1}/3)...")
+                time.sleep(3 * (attempt + 1))
 
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as f:
             f.write(resp.content)
