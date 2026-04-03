@@ -65,7 +65,7 @@ class RSSGenerator:
         for ep in reversed(episodes):
             fe = fg.add_entry()
             fe.title(ep["title"])
-            fe.description(f'{ep["description"]}\n\nSource: {ep["source_url"]}')
+            fe.description(ep["description"])
             fe.published(ep["pub_date"])
 
             audio_url = f'{self.audio_base_url}/episodes/{ep["filename"]}'
@@ -80,28 +80,26 @@ class RSSGenerator:
         self._inject_chapters(feed_path, episodes)
 
     def _inject_chapters(self, feed_path: str, episodes: list[dict]) -> None:
-        """Add <podcast:chapters> tags to the RSS XML.
+        """Add <podcast:chapters> tags and fix namespace prefixes in RSS XML.
 
         feedgen doesn't support the podcast 2.0 namespace natively,
         so we inject it via ElementTree post-processing.
+        Also fixes the iTunes namespace prefix from 'ns0' to 'itunes'.
         """
         import xml.etree.ElementTree as ET
 
+        ITUNES_NS = "http://www.itunes.com/dtds/podcast-1.0.dtd"
+        ET.register_namespace("itunes", ITUNES_NS)
         ET.register_namespace("podcast", PODCAST_NS)
+
         tree = ET.parse(feed_path)
         root = tree.getroot()
-
-        # Add namespace to <rss> tag
-        rss = root if root.tag == "rss" else root.find("rss")
-        if rss is not None:
-            rss.set(f"xmlns:podcast", PODCAST_NS)
 
         channel = root.find("channel") if root.tag == "rss" else root.find(".//channel")
         if channel is None:
             return
 
         items = channel.findall("item")
-        # episodes are reversed in feed, so reversed episodes match items order
         reversed_episodes = list(reversed(episodes))
 
         for i, item in enumerate(items):
@@ -114,7 +112,18 @@ class RSSGenerator:
                 ch_elem.set("url", chapters_url)
                 ch_elem.set("type", "application/json+chapters")
 
+        # Write with proper namespace declarations
         tree.write(feed_path, encoding="unicode", xml_declaration=True)
+
+        # Ensure exactly one xmlns:podcast declaration on the <rss> tag
+        text = Path(feed_path).read_text(encoding="utf-8")
+        podcast_decl = f'xmlns:podcast="{PODCAST_NS}"'
+        while text.count(podcast_decl) > 1:
+            # Remove one duplicate (with optional trailing space)
+            text = text.replace(podcast_decl + ' ', '', 1)
+        if podcast_decl not in text:
+            text = text.replace('<rss ', f'<rss {podcast_decl} ', 1)
+        Path(feed_path).write_text(text, encoding="utf-8")
 
     def _load_episodes(self) -> list[dict]:
         if Path(self.db_path).exists():

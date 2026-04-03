@@ -10,6 +10,8 @@ import edge_tts
 from mutagen.id3 import ID3, CTOC, CHAP, TIT2, CTOCFlags
 from mutagen.mp3 import MP3
 
+from .text_preprocessor import preprocess_for_tts
+
 
 @dataclass
 class Chapter:
@@ -65,6 +67,7 @@ class EdgeTTSEngine:
         self.rate = rate
 
     async def _synthesize(self, text: str, output_path: str) -> None:
+        text = preprocess_for_tts(text)
         communicate = edge_tts.Communicate(text, self.voice, rate=self.rate)
         await communicate.save(output_path)
 

@@ -17,6 +17,8 @@ class ScriptResult:
     """Contains both short and long versions of the generated script."""
     short: str
     long: str
+    podcast_title: str = ""
+    intro: str = ""
 
 
 def duration_to_chars(minutes: int) -> tuple[int, int]:
@@ -54,7 +56,14 @@ class ScriptGenerator:
             short_script = self._call_llm_builtin(fetch_result, "short")
             lo, hi = duration_to_chars(duration)
             long_script = self._call_llm_builtin(fetch_result, "long", duration_hint=(lo, hi, duration))
-        return ScriptResult(short=short_script, long=long_script)
+
+        podcast_title, intro = self._generate_title_and_intro(
+            fetch_result.title, short_script
+        )
+        return ScriptResult(
+            short=short_script, long=long_script,
+            podcast_title=podcast_title, intro=intro,
+        )
 
     def _call_llm_builtin(self, fetch_result: FetchResult, length: str,
                           duration_hint: tuple[int, int, int] | None = None) -> str:
@@ -64,6 +73,38 @@ class ScriptGenerator:
             lo, hi, mins = duration_hint
             user_prompt += f"\n\n请将以上内容控制在 {lo}-{hi} 字（约 {mins} 分钟朗读时长）。"
         return self._call_llm_raw(user_prompt)
+
+    def _generate_title_and_intro(self, original_title: str, short_script: str) -> tuple[str, str]:
+        """Generate a podcast-friendly title and 3-sentence intro from the short script."""
+        prompt = f"""根据以下信息，生成两样东西：
+
+原始标题：{original_title}
+
+内容摘要：
+{short_script}
+
+请生成：
+1. 播客标题：格式为"方法/主题简称：一句话说明做了什么"，简洁有力，不超过30字。例如"LoRA：用低秩分解高效微调大模型"
+2. 三句话简介：用三句话概括这期内容的核心，让听众快速判断是否感兴趣。
+
+严格按以下格式输出，不要加其他内容：
+标题：xxx
+简介：xxx"""
+        result = self._call_llm_raw(prompt)
+        return self._parse_title_and_intro(result, original_title)
+
+    @staticmethod
+    def _parse_title_and_intro(text: str, fallback_title: str) -> tuple[str, str]:
+        """Parse LLM output into (title, intro)."""
+        title = fallback_title
+        intro = ""
+        for line in text.strip().splitlines():
+            line = line.strip()
+            if line.startswith("标题：") or line.startswith("标题:"):
+                title = line.split("：", 1)[-1].split(":", 1)[-1].strip()
+            elif line.startswith("简介：") or line.startswith("简介:"):
+                intro = line.split("：", 1)[-1].split(":", 1)[-1].strip()
+        return title, intro
 
     def _call_llm_raw(self, user_prompt: str) -> str:
         response = self.client.chat.completions.create(

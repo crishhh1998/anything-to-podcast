@@ -122,6 +122,8 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
     scripts = generator.generate(result, duration=duration, prompt_file=prompt_file)
     print(f"  Short script: {len(scripts.short)} chars")
     print(f"  Long script: {len(scripts.long)} chars")
+    print(f"  Podcast title: {scripts.podcast_title}")
+    print(f"  Intro: {scripts.intro[:80]}...")
 
     # Step 3: Synthesize audio (from long script)
     print("[3/6] Synthesizing audio (long version)...")
@@ -130,7 +132,8 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
         voice=tts_cfg.get("voice", "zh-CN-XiaoxiaoNeural"),
         rate=tts_cfg.get("rate", "+0%"),
     )
-    tts_result = engine.synthesize(scripts.long, result.title, episodes_dir)
+    episode_title = scripts.podcast_title or result.title
+    tts_result = engine.synthesize(scripts.long, episode_title, episodes_dir)
     audio_path = tts_result.audio_path
     print(f"  Audio saved: {audio_path}")
     if tts_result.chapters:
@@ -185,7 +188,7 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
             parent_page_id=notion_cfg["parent_page_id"],
         )
         writer.save_scripts(
-            title=result.title,
+            title=episode_title,
             source_url=url,
             source_type=result.source_type,
             short_script=scripts.short,
@@ -206,18 +209,22 @@ def generate_episode(url: str, config: dict, prompt_file: str | None = None,
         output_dir=output_dir,
         audio_base_url=oss_cfg["base_url"],
     )
-    # Build description with chapter timestamps
-    desc_parts = [f"Source: {result.source_type} | {result.url}"]
-    if tts_result.chapters:
+    # Build description: intro + chapter timestamps
+    desc_parts = []
+    if scripts.intro:
+        desc_parts.append(scripts.intro)
         desc_parts.append("")
+    if tts_result.chapters:
         for ch in tts_result.chapters:
             m, s = divmod(int(ch.start_seconds), 60)
             h, m = divmod(m, 60)
             ts = f"{h:02d}:{m:02d}:{s:02d}" if h else f"{m:02d}:{s:02d}"
             desc_parts.append(f"{ts} {ch.title}")
+    desc_parts.append("")
+    desc_parts.append(f"Source: {result.source_type} | {result.url}")
 
     rss.add_episode(
-        title=result.title,
+        title=episode_title,
         description="\n".join(desc_parts),
         audio_filename=filename,
         file_size=audio_size,
