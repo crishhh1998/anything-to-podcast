@@ -19,7 +19,7 @@ cp config.example.yaml config.yaml
 
 编辑 `config.yaml`，修改 `llm` 部分的 `base_url`、`api_key`、`model`。
 
-Twitter 需要额外提供 `cookies.txt` 文件（浏览器导出）。
+Twitter/X 使用 fxtwitter API 抓取推文内容，无需额外配置。
 
 ### Notion 配置（可选）
 
@@ -80,7 +80,7 @@ notion:
 # Reddit 帖子
 ./manage.sh add https://www.reddit.com/r/MachineLearning/comments/xxx/
 
-# X/Twitter（需要 cookies.txt）
+# X/Twitter
 ./manage.sh add https://x.com/user/status/123456
 ```
 
@@ -112,7 +112,7 @@ anything-to-podcast/
 │   ├── arxiv_fetcher.py        #   arXiv 论文抓取（下载 PDF → 提取文本）
 │   ├── pdf_fetcher.py          #   通用 PDF / 本地文件抓取
 │   ├── reddit_fetcher.py       #   Reddit 帖子 + 评论抓取
-│   └── twitter_fetcher.py      #   X/Twitter 推文抓取（依赖 yt-dlp + cookies）
+│   └── twitter_fetcher.py      #   X/Twitter 推文抓取（via fxtwitter API）
 │
 ├── processor/                  # LLM 脚本生成模块
 │   ├── prompts.py              #   内置 prompt 模板（按来源类型 × 长短）
