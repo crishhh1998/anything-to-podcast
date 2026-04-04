@@ -91,5 +91,15 @@
     "pub_date": "2026-04-03T12:20:57.744928+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_201943_VAR_按尺度自回归生成图像_chapters.json",
     "duration_seconds": 1005.7447849999999
+  },
+  {
+    "title": "LLM知识库：把资料编译成可演化个人Wiki",
+    "description": "Karpathy 展示了一种用 LLM 搭建个人知识库的工作流：把论文、网页、代码和图片统一摄取，再自动编译成带链接、分类和概念条目的 Markdown wiki。这个系统不只是拿来检索，还能在 Obsidian 里持续生成问答、文档、幻灯片和图表，并把输出反向归档进知识库。重点不在某个单点工具，而在于让 LLM 从聊天助手升级为“知识操作系统”，持续整理、维护并扩展你的研究积累。\n\n00:00 主题引入\n01:14 从原始资料到知识编译\n03:19 Obsidian 作为前端\n04:51 当知识库大到能问复杂问题\n06:31 输出不只是答案\n08:02 用 LLM 给知识库做体检\n09:18 辅助工具与搜索能力\n10:50 从上下文到权重\n12:07 更大的产品想象\n13:10 简短总结\n\nSource: twitter | https://x.com/karpathy/status/2039805659525644595?s=46",
+    "filename": "20260405_000328_LLM知识库_把资料编译成可演化个人Wiki.mp3",
+    "file_size": 13417489,
+    "source_url": "https://x.com/karpathy/status/2039805659525644595?s=46",
+    "pub_date": "2026-04-04T16:04:38.773861+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_000328_LLM知识库_把资料编译成可演化个人Wiki_chapters.json",
+    "duration_seconds": 837.216101
   }
 ]
