@@ -101,5 +101,15 @@
     "pub_date": "2026-04-04T16:04:38.773861+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_000328_LLM知识库_把资料编译成可演化个人Wiki_chapters.json",
     "duration_seconds": 837.216101
+  },
+  {
+    "title": "Fast-WAM：训练学世界，测试直接出动作",
+    "description": "这期聊一篇直击关键问题的机器人论文：世界动作模型真的需要在测试时先“想象未来视频”再行动吗？Fast-WAM给出的答案是，不一定——真正有效的关键，主要来自训练时的视频共训练，而不是测试时显式生成未来。它在仿真和真实世界里都证明了：不脑补未来画面，也能保持强性能，还把推理延迟大幅降到可实时部署。\n\n00:00 背景与动机\n02:23 方法拆解\n06:10 实验结果解读\n12:55 图表导读\n14:48 评价与讨论\n17:46 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2603.16666",
+    "filename": "20260405_130138_Fast-WAM_训练学世界_测试直接出动作.mp3",
+    "file_size": 19205819,
+    "source_url": "https://arxiv.org/pdf/2603.16666",
+    "pub_date": "2026-04-05T05:02:39.769668+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_130138_Fast-WAM_训练学世界_测试直接出动作_chapters.json",
+    "duration_seconds": 1198.800069
   }
 ]
