@@ -141,5 +141,15 @@
     "pub_date": "2026-04-06T13:38:38.808227+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213730_MAE_高遮挡重建学会视觉表征_chapters.json",
     "duration_seconds": 1061.616079
+  },
+  {
+    "title": "SigLIP 2：统一配方升级多语言视觉编码器",
+    "description": "这期聊 Google DeepMind 的 SigLIP 2，如何把 SigLIP、captioning pretraining、self-distillation 和 masked prediction 合成一套统一训练方案。它不只提升 zero-shot 分类和图文检索，还显著增强定位、分割、深度估计和 OCR 等细颗粒度能力。我们也会重点讲它为什么能在英文性能、多语言泛化和稠密特征之间取得更好的平衡。\n\n00:00 背景与动机\n02:04 方法拆解\n05:58 实验结果深读\n14:40 图表导读\n16:11 评价与讨论\n18:18 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2502.14786",
+    "filename": "20260406_214438_SigLIP_2_统一配方升级多语言视觉编码器.mp3",
+    "file_size": 19368149,
+    "source_url": "https://arxiv.org/pdf/2502.14786",
+    "pub_date": "2026-04-06T13:45:59.721513+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_214438_SigLIP_2_统一配方升级多语言视觉编码器_chapters.json",
+    "duration_seconds": 1208.976077
   }
 ]
