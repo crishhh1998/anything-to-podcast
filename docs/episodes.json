@@ -151,5 +151,15 @@
     "pub_date": "2026-04-06T13:45:59.721513+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_214438_SigLIP_2_统一配方升级多语言视觉编码器_chapters.json",
     "duration_seconds": 1208.976077
+  },
+  {
+    "title": "CLIP：用自然语言监督学通用视觉",
+    "description": "这期讲OpenAI的CLIP，如何用4亿图文对替代固定标签训练视觉模型。它把图片和文本映射到同一空间，用对比学习直接实现强大的zero-shot识别。我们还会讲清它为何是视觉领域的范式转折，以及它的能力边界与现实问题。\n\n00:00 背景与动机\n01:48 方法拆解\n04:21 实验结果深读\n09:37 图表导读\n11:08 评价与讨论\n12:53 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2103.00020",
+    "filename": "20260406_214846_CLIP_用自然语言监督学通用视觉.mp3",
+    "file_size": 13826745,
+    "source_url": "https://arxiv.org/pdf/2103.00020",
+    "pub_date": "2026-04-06T13:49:40.219105+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_214846_CLIP_用自然语言监督学通用视觉_chapters.json",
+    "duration_seconds": 862.968619
   }
 ]
