@@ -121,5 +121,15 @@
     "pub_date": "2026-04-06T13:28:21.565371+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_212702_DINOv2_无监督学出通用视觉特征_chapters.json",
     "duration_seconds": 977.160046
+  },
+  {
+    "title": "DINOv3：用Gram锚定拯救稠密视觉特征",
+    "description": "这期聊 DINOv3 怎么点破一个关键问题：自监督视觉模型越做越大，分类更强了，但分割、深度、跟踪这些依赖 patch 细节的稠密特征反而会退化。它的核心招式是 Gram anchoring，不强行对齐特征值，而是锁住 patch 之间的相似结构，让局部几何关系不散。结果也很硬：ADE20k、NYUv2、DAVIS、COCO 等任务全面提升，说明大规模自监督视觉模型第一次更系统地解决了 dense feature 失真问题。\n\n00:00 背景与动机\n02:03 方法拆解\n05:09 实验结果深读\n11:44 图表导读\n13:11 评价与讨论\n15:05 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2508.10104",
+    "filename": "20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征.mp3",
+    "file_size": 16010255,
+    "source_url": "https://arxiv.org/pdf/2508.10104",
+    "pub_date": "2026-04-06T13:35:30.465605+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征_chapters.json",
+    "duration_seconds": 999.3360779999999
   }
 ]
