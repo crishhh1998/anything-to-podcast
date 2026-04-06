@@ -161,5 +161,15 @@
     "pub_date": "2026-04-06T13:49:40.219105+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_214846_CLIP_用自然语言监督学通用视觉_chapters.json",
     "duration_seconds": 862.968619
+  },
+  {
+    "title": "I-JEPA：在表征空间预测图像语义",
+    "description": "这期聊 Meta 等提出的 I-JEPA：不用依赖复杂数据增强，也不做像素重建，而是用图像上下文去预测目标区域的表征。它抓住了自监督学习里的一个关键新思路——直接学“语义级”表示，因此在线性评估、低标注迁移和多项下游任务上表现很强。我们还会重点拆解它为什么有效：三模块架构、masking 策略、EMA teacher，以及“预测表征而不是像素”到底改变了什么。\n\n00:00 背景与动机\n02:23 方法拆解\n05:15 实验结果解读\n12:55 图表导读\n14:18 评价与讨论\n16:23 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2301.08243",
+    "filename": "20260406_215141_I-JEPA_在表征空间预测图像语义.mp3",
+    "file_size": 17641089,
+    "source_url": "https://arxiv.org/pdf/2301.08243",
+    "pub_date": "2026-04-06T13:52:51.493993+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_215141_I-JEPA_在表征空间预测图像语义_chapters.json",
+    "duration_seconds": 1101.144038
   }
 ]
