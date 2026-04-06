@@ -131,5 +131,15 @@
     "pub_date": "2026-04-06T13:35:30.465605+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征_chapters.json",
     "duration_seconds": 999.3360779999999
+  },
+  {
+    "title": "MAE：高遮挡重建学会视觉表征",
+    "description": "这期讲清楚 MAE 怎么把 NLP 里的 masked modeling 成功搬到视觉领域：随机遮掉 75% 图像，只让编码器看可见 patch，再用轻量解码器补全。你会理解它为什么用极简的像素重建目标，却能在分类、检测和分割迁移上全面超过监督预训练。也会看到这篇论文真正厉害的地方，不只是效果强，而是重新定义了视觉自监督的主流路线。\n\n00:00 背景与动机\n01:53 方法拆解\n04:27 实验结果深读\n12:41 图表导读\n13:53 评价与讨论\n15:54 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2111.06377",
+    "filename": "20260406_213730_MAE_高遮挡重建学会视觉表征.mp3",
+    "file_size": 17008502,
+    "source_url": "https://arxiv.org/pdf/2111.06377",
+    "pub_date": "2026-04-06T13:38:38.808227+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213730_MAE_高遮挡重建学会视觉表征_chapters.json",
+    "duration_seconds": 1061.616079
   }
 ]

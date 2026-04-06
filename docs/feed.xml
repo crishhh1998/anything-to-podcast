@@ -12,7 +12,7 @@
       <link>https://crishhh1998.github.io/anything-to-podcast</link>
     </image>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Apr 2026 13:35:30 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Apr 2026 13:38:38 +0000</lastBuildDate>
     <itunes:author>Anything to Podcast</itunes:author>
     <itunes:category text="Technology" />
     <itunes:image href="https://crishhh1998.github.io/anything-to-podcast/cover.jpg" />
@@ -38,7 +38,7 @@ Source: paper | https://arxiv.org/pdf/2212.09748</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成.mp3" length="18442282" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 07:26:20 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213730_MAE_高遮挡重建学会视觉表征_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>SiT：重构扩散路径，全面超越DiT</title>
       <description>这期聊 SiT 如何在不改 DiT 骨干和参数量的前提下，把扩散模型里的路径、目标函数和采样方式拆开重做。论文发现学 velocity 比学 score 更稳，Linear 和 GVP 路径也比传统 VP 更好优化，推理时甚至还能单独调采样噪声继续提性能。在 ImageNet 256×256 和 512×512 上，SiT 都稳定优于 DiT，说明它不只是刷分，而是在统一 flow 与 diffusion 的设计空间。
@@ -54,7 +54,7 @@ Source: paper | https://arxiv.org/pdf/2401.08740</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT.mp3" length="16394744" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 07:52:18 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_212702_DINOv2_无监督学出通用视觉特征_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>Rectified Flow：让高分辨率文生图又快又强</title>
       <description>这期聊 Stability AI 如何把 Rectified Flow 真正做成高分辨率文生图的可行主线，不只改生成路径，还重做了时间采样和多模态 Transformer。论文最强之处在于系统验证：在大量配方对比中，rf/lognorm(0,1) 和 MM-DiT 同时提升画质、语义对齐和少步采样效率。更关键的是，它把模型扩展到 8B 后，在 GenEval 和人类偏好上超过 DALL·E 3，几乎就是 Stable Diffusion 3 的技术宣言。
@@ -70,7 +70,7 @@ Source: paper | https://arxiv.org/pdf/2403.03206</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强.mp3" length="16111921" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 08:01:34 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_130138_Fast-WAM_训练学世界_测试直接出动作_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_212702_DINOv2_无监督学出通用视觉特征_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>REPA：对齐强表征让DiT训练快17.5倍</title>
       <description>这期讲一篇很“反直觉”的工作：扩散 Transformer 训练慢，未必主要是去噪难，而可能是内部表征学得不够好。REPA 的做法非常轻量，只是在训练时把生成模型的中间特征对齐到 DINOv2、CLIP 这类强视觉编码器的 patch 表征上。结果是 SiT 和 DiT 不仅收敛大幅加速，FID 还显著提升，说明给生成模型搭一个“表征脚手架”真的有效。
@@ -86,7 +86,7 @@ Source: paper | https://arxiv.org/pdf/2410.06940</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍.mp3" length="15093590" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 08:25:35 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_000328_LLM知识库_把资料编译成可演化个人Wiki_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_130138_Fast-WAM_训练学世界_测试直接出动作_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>RAE-DiT：用表征自编码器释放扩散生成上限</title>
       <description>这期聊一篇很强的 DiT 论文：作者用 DINO、SigLIP、MAE 这类“更懂图像”的预训练表征编码器，替换老式 VAE，做成新的 Representation Autoencoder。核心发现是高语义 latent 虽然更强，但也会逼着 Diffusion Transformer 一起升级，包括更匹配的宽度、重新设计的噪声日程，以及能处理带噪 latent 的 decoder。实验上它不仅在 ImageNet 上把 FID 做到 SOTA，更重要的是提出了一个方向：自编码器不该只是压缩工具，而应成为连接视觉理解与生成的表示基础设施。
@@ -102,7 +102,7 @@ Source: paper | https://arxiv.org/pdf/2510.11690</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限.mp3" length="13394142" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 08:49:38 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_201943_VAR_按尺度自回归生成图像_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_000328_LLM知识库_把资料编译成可演化个人Wiki_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>DMD：一步蒸馏逼近扩散模型画质</title>
       <description>这期讲一篇来自 MIT 和 Adobe Research 的工作：DMD 不再强行学习复杂采样轨迹，而是直接让一步生成器去匹配教师扩散模型的最终分布。它用“教师真实 score - 学生假样本 score”的分布匹配，再配合回归损失稳住结构和多样性，把一步生成质量大幅拉近原始扩散模型。结果上，它在 ImageNet 和文生图任务里都显著优于其他一步方法，同时带来接近 30 倍到数百倍的推理加速。
@@ -118,7 +118,7 @@ Source: paper | https://arxiv.org/pdf/2311.18828</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质.mp3" length="16024897" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 09:01:24 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_195210_Self_Forcing_让视频扩散按推理方式训练_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_201943_VAR_按尺度自回归生成图像_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>DMD2：用分布匹配把扩散蒸馏提速到4步</title>
       <description>这期讲 MIT 和 Adobe 提出的 DMD2，如何去掉昂贵的回归蒸馏，用分布匹配加 GAN 监督训练更快的图像生成模型。它通过 TTUR 稳定 fake score、用 backward simulation 解决多步训练和推理不一致，让 SDXL 从近百步采样压到 4 步。更关键的是，DMD2 不只是更快，ImageNet 和 COCO 上的结果甚至能追平或超过教师模型，重新定义了扩散蒸馏怎么做。
@@ -134,7 +134,7 @@ Source: paper | https://arxiv.org/pdf/2405.14867</description>
       <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步.mp3</guid>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步.mp3" length="18886180" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 09:10:45 +0000</pubDate>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_175426_LeWM_从像素稳定学会世界模型_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_195210_Self_Forcing_让视频扩散按推理方式训练_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>LeWM：从像素稳定学会世界模型</title>
       <description>这期聊 LeWorldModel，看看它如何只靠预测损失加一个高斯正则，就稳定训练端到端 JEPA world model，避免表征坍塌。它不做像素重建，而是直接学习对未来最有用的 latent，在 Push-T 上明显超过 JEPA baseline，还比基于预训练特征的方法快近 48 倍。我们也会讲清它为什么有效、在哪些场景还不够强，以及这项工作为何让“单卡可复现的世界模型”更进一步。
@@ -151,7 +151,7 @@ Source: paper | https://arxiv.org/pdf/2603.19312</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_175426_LeWM_从像素稳定学会世界模型.mp3" length="15358005" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 09:56:40 +0000</pubDate>
       <itunes:duration>15:58</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_175426_LeWM_从像素稳定学会世界模型_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>Self Forcing：让视频扩散按推理方式训练</title>
       <description>这期聊 Adobe 和 UT Austin 的 Self Forcing，核心是解决自回归视频扩散里训练看真值、测试吃自己输出造成的 exposure bias。它直接在训练中做 autoregressive self-rollout，用 KV cache 按真实推理流程逐帧生成，再用整段视频的分布匹配损失来约束稳定性和质量。结果是在接近实时的 17 FPS 下，画质和语义都明显超过 CausVid，并在人工偏好上赢过 Wan2.1、SkyReels-V2 和 MAGI-1。
@@ -168,7 +168,7 @@ Source: paper | https://arxiv.org/pdf/2506.08009</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_195210_Self_Forcing_让视频扩散按推理方式训练.mp3" length="16512720" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 11:53:25 +0000</pubDate>
       <itunes:duration>17:10</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_170533_DMD2_用分布匹配把扩散蒸馏提速到4步_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>VAR：按尺度自回归生成图像</title>
       <description>这期聊北大和字节提出的 VAR，核心不是逐 token 生成图像，而是像画画一样从低分辨率到高分辨率逐尺度补全。它在 ImageNet 上首次把视觉自回归路线做到了超越 diffusion transformer，FID、速度和扩展性都很强。更重要的是，VAR 重新定义了“视觉 GPT”该怎样生成图像，也展现出接近大语言模型的 scaling law 潜力。
@@ -185,7 +185,7 @@ Source: paper | https://arxiv.org/pdf/2404.02905</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_201943_VAR_按尺度自回归生成图像.mp3" length="16114015" type="audio/mpeg" />
       <pubDate>Fri, 03 Apr 2026 12:20:57 +0000</pubDate>
       <itunes:duration>16:45</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_165831_DMD_一步蒸馏逼近扩散模型画质_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>LLM知识库：把资料编译成可演化个人Wiki</title>
       <description>Karpathy 展示了一种用 LLM 搭建个人知识库的工作流：把论文、网页、代码和图片统一摄取，再自动编译成带链接、分类和概念条目的 Markdown wiki。这个系统不只是拿来检索，还能在 Obsidian 里持续生成问答、文档、幻灯片和图表，并把输出反向归档进知识库。重点不在某个单点工具，而在于让 LLM 从聊天助手升级为“知识操作系统”，持续整理、维护并扩展你的研究积累。
@@ -206,7 +206,7 @@ Source: twitter | https://x.com/karpathy/status/2039805659525644595?s=46</descri
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_000328_LLM知识库_把资料编译成可演化个人Wiki.mp3" length="13417489" type="audio/mpeg" />
       <pubDate>Sat, 04 Apr 2026 16:04:38 +0000</pubDate>
       <itunes:duration>13:57</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_164618_RAE-DiT_用表征自编码器释放扩散生成上限_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>Fast-WAM：训练学世界，测试直接出动作</title>
       <description>这期聊一篇直击关键问题的机器人论文：世界动作模型真的需要在测试时先“想象未来视频”再行动吗？Fast-WAM给出的答案是，不一定——真正有效的关键，主要来自训练时的视频共训练，而不是测试时显式生成未来。它在仿真和真实世界里都证明了：不脑补未来画面，也能保持强性能，还把推理延迟大幅降到可实时部署。
@@ -223,7 +223,7 @@ Source: paper | https://arxiv.org/pdf/2603.16666</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_130138_Fast-WAM_训练学世界_测试直接出动作.mp3" length="19205819" type="audio/mpeg" />
       <pubDate>Sun, 05 Apr 2026 05:02:39 +0000</pubDate>
       <itunes:duration>19:58</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_162414_REPA_对齐强表征让DiT训练快17_5倍_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>DINOv2：无监督学出通用视觉特征</title>
       <description>这期聊 Meta 和 Inria 的 DINOv2：只靠高质量无标注图像和自监督学习，能否训练出像 foundation model 一样开箱即用的视觉特征。我们会拆解它的三大关键：LVD-142M curated 数据、结合全局与 patch 的训练目标，以及把大模型能力蒸馏给小模型的规模化工程。更重要的是看它为什么能在分类、检索、分割、深度和鲁棒性上全面超过不少弱监督方法，并重新证明“纯视觉路线”依然大有可为。
@@ -240,7 +240,7 @@ Source: paper | https://arxiv.org/pdf/2304.07193</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_212702_DINOv2_无监督学出通用视觉特征.mp3" length="15655471" type="audio/mpeg" />
       <pubDate>Mon, 06 Apr 2026 13:28:21 +0000</pubDate>
       <itunes:duration>16:17</itunes:duration>
-    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json" type="application/json+chapters" /></item>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_160038_Rectified_Flow_让高分辨率文生图又快又强_chapters.json" type="application/json+chapters" /></item>
     <item>
       <title>DINOv3：用Gram锚定拯救稠密视觉特征</title>
       <description>这期聊 DINOv3 怎么点破一个关键问题：自监督视觉模型越做越大，分类更强了，但分割、深度、跟踪这些依赖 patch 细节的稠密特征反而会退化。它的核心招式是 Gram anchoring，不强行对齐特征值，而是锁住 patch 之间的相似结构，让局部几何关系不散。结果也很硬：ADE20k、NYUv2、DAVIS、COCO 等任务全面提升，说明大规模自监督视觉模型第一次更系统地解决了 dense feature 失真问题。
@@ -257,6 +257,23 @@ Source: paper | https://arxiv.org/pdf/2508.10104</description>
       <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213400_DINOv3_用Gram锚定拯救稠密视觉特征.mp3" length="16010255" type="audio/mpeg" />
       <pubDate>Mon, 06 Apr 2026 13:35:30 +0000</pubDate>
       <itunes:duration>16:39</itunes:duration>
+    <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_155117_SiT_重构扩散路径_全面超越DiT_chapters.json" type="application/json+chapters" /></item>
+    <item>
+      <title>MAE：高遮挡重建学会视觉表征</title>
+      <description>这期讲清楚 MAE 怎么把 NLP 里的 masked modeling 成功搬到视觉领域：随机遮掉 75% 图像，只让编码器看可见 patch，再用轻量解码器补全。你会理解它为什么用极简的像素重建目标，却能在分类、检测和分割迁移上全面超过监督预训练。也会看到这篇论文真正厉害的地方，不只是效果强，而是重新定义了视觉自监督的主流路线。
+
+00:00 背景与动机
+01:53 方法拆解
+04:27 实验结果深读
+12:41 图表导读
+13:53 评价与讨论
+15:54 延伸思考
+
+Source: paper | https://arxiv.org/pdf/2111.06377</description>
+      <guid isPermaLink="true">https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213730_MAE_高遮挡重建学会视觉表征.mp3</guid>
+      <enclosure url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_213730_MAE_高遮挡重建学会视觉表征.mp3" length="17008502" type="audio/mpeg" />
+      <pubDate>Mon, 06 Apr 2026 13:38:38 +0000</pubDate>
+      <itunes:duration>17:41</itunes:duration>
     <podcast:chapters url="https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260403_152512_DiT_用Transformer扩展扩散生成_chapters.json" type="application/json+chapters" /></item>
   </channel>
 </rss>
