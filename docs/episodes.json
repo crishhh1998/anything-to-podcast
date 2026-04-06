@@ -111,5 +111,15 @@
     "pub_date": "2026-04-05T05:02:39.769668+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260405_130138_Fast-WAM_训练学世界_测试直接出动作_chapters.json",
     "duration_seconds": 1198.800069
+  },
+  {
+    "title": "DINOv2：无监督学出通用视觉特征",
+    "description": "这期聊 Meta 和 Inria 的 DINOv2：只靠高质量无标注图像和自监督学习，能否训练出像 foundation model 一样开箱即用的视觉特征。我们会拆解它的三大关键：LVD-142M curated 数据、结合全局与 patch 的训练目标，以及把大模型能力蒸馏给小模型的规模化工程。更重要的是看它为什么能在分类、检索、分割、深度和鲁棒性上全面超过不少弱监督方法，并重新证明“纯视觉路线”依然大有可为。\n\n00:00 背景与动机\n01:54 方法拆解\n04:44 实验结果解读\n11:36 图表导读\n12:42 评价与讨论\n14:27 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2304.07193",
+    "filename": "20260406_212702_DINOv2_无监督学出通用视觉特征.mp3",
+    "file_size": 15655471,
+    "source_url": "https://arxiv.org/pdf/2304.07193",
+    "pub_date": "2026-04-06T13:28:21.565371+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_212702_DINOv2_无监督学出通用视觉特征_chapters.json",
+    "duration_seconds": 977.160046
   }
 ]
