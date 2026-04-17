@@ -191,5 +191,15 @@
     "pub_date": "2026-04-17T03:36:49.822740+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_113553_Nucleus-Image_用稀疏MoE兼顾文生图质量与效率_chapters.json",
     "duration_seconds": 1102.0560560000001
+  },
+  {
+    "title": "VideoFlexTok：用粗到细可变长token做视频生成",
+    "description": "这期介绍 Apple 和 EPFL 的 VideoFlexTok：它不再把视频固定切成同样多的 3D token，而是先用少量 token 表达语义、运动和场景结构，再逐步补细节。这样做能把视频生成模型的训练和推理成本显著降下来，甚至用小 5 到 10 倍的模型，做到接近甚至超过传统 tokenizer 的效果。我们还会讲清它为什么能同时兼顾长视频、生成质量和语义一致性，以及这种“先提纲、后润色”的 token 组织方式为什么值得关注。\n\n00:00 背景与动机\n02:56 方法拆解\n06:56 实验深读\n14:42 图表导读\n16:32 评价与讨论\n19:16 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2604.12887",
+    "filename": "20260417_114335_VideoFlexTok_用粗到细可变长token做视频生成.mp3",
+    "file_size": 20871790,
+    "source_url": "https://arxiv.org/pdf/2604.12887",
+    "pub_date": "2026-04-17T03:46:43.032868+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_114335_VideoFlexTok_用粗到细可变长token做视频生成_chapters.json",
+    "duration_seconds": 1302.816054
   }
 ]
