@@ -201,5 +201,15 @@
     "pub_date": "2026-04-17T03:46:43.032868+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_114335_VideoFlexTok_用粗到细可变长token做视频生成_chapters.json",
     "duration_seconds": 1302.816054
+  },
+  {
+    "title": "Flow Map LM：一步生成高质量文本",
+    "description": "这期聊一篇来自 KAIST 和 CMU 的新工作：它用连续 flow 取代离散扩散，把语言模型从“多步去噪”推进到“一步生成”。论文的关键发现是，少步生成效果差，不是因为并行生成不行，而是离散近似会破坏 token 间相关性。结果上，它在 LM1B 和 OpenWebText 上都显著提升了 few-step 生成质量，也挑战了“文本生成必须用离散噪声过程”的传统假设。\n\n00:00 背景与动机\n02:16 方法拆解\n06:13 实验结果\n13:51 图表导读\n15:28 评价与讨论\n17:51 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2602.16813",
+    "filename": "20260417_115324_Flow_Map_LM_一步生成高质量文本.mp3",
+    "file_size": 18810030,
+    "source_url": "https://arxiv.org/pdf/2602.16813",
+    "pub_date": "2026-04-17T03:54:15.057346+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_115324_Flow_Map_LM_一步生成高质量文本_chapters.json",
+    "duration_seconds": 1174.080047
   }
 ]
