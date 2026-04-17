@@ -181,5 +181,15 @@
     "pub_date": "2026-04-06T13:58:28.975030+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260406_215731_CAE_先补语义表示再重建图像_chapters.json",
     "duration_seconds": 1048.2000679999999
+  },
+  {
+    "title": "Nucleus-Image：用稀疏MoE兼顾文生图质量与效率",
+    "description": "这期聊 Nucleus AI 的 Nucleus-Image，看看它如何把 170 亿参数的 Diffusion Transformer 做成稀疏 MoE，并把单次激活压到约 20 亿。核心亮点是 decoupled routing 和 Expert-Choice Routing，让扩散模型里的专家分工不只看时间步，而能更稳定地按内容路由。我们也会讲它在 GenEval、DPG-Bench、OneIG-Bench 上为什么有竞争力，以及这条 sparse MoE 路线为何可能成为图像生成的新 scaling 方向。\n\n00:00 背景与动机\n02:10 方法拆解\n06:17 实验结果解读\n12:42 图表导读\n14:23 评价与讨论\n16:22 延伸思考\n\nSource: paper | https://arxiv.org/pdf/2604.12163",
+    "filename": "20260417_113553_Nucleus-Image_用稀疏MoE兼顾文生图质量与效率.mp3",
+    "file_size": 17656150,
+    "source_url": "https://arxiv.org/pdf/2604.12163",
+    "pub_date": "2026-04-17T03:36:49.822740+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_113553_Nucleus-Image_用稀疏MoE兼顾文生图质量与效率_chapters.json",
+    "duration_seconds": 1102.0560560000001
   }
 ]
