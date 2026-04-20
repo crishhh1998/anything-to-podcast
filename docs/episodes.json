@@ -221,5 +221,15 @@
     "pub_date": "2026-04-20T04:41:36.296869+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260420_124024_Ouro_让大模型在隐空间循环推理_chapters.json",
     "duration_seconds": 1109.1360320000001
+  },
+  {
+    "title": "Claude Code：拆解生产级代码Agent方法空间",
+    "description": "这期聊的不是一个“更聪明”的新Agent，而是 Claude Code 这类可落地代码Agent到底怎么被工程化做出来。核心观点很明确：真正决定系统能不能用的，不只是模型推理，而是权限控制、上下文压缩、工具执行、失败恢复和状态持久化这些外部 harness。我们还会讲它为什么用极简 while-loop 搭配重型运行时设计，以及这对未来自主软件工程意味着什么。\n\n00:00 背景与动机\n02:05 方法全景\n03:58 关键模块拆解\n09:22 训练与闭环\n10:48 实验支撑什么\n12:21 图表导读\n13:43 价值与局限\n\nSource: paper | https://arxiv.org/pdf/2604.14228",
+    "filename": "20260420_124445_Claude_Code_拆解生产级代码Agent方法空间.mp3",
+    "file_size": 15757205,
+    "source_url": "https://arxiv.org/pdf/2604.14228",
+    "pub_date": "2026-04-20T04:45:58.995375+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260420_124445_Claude_Code_拆解生产级代码Agent方法空间_chapters.json",
+    "duration_seconds": 983.448028
   }
 ]
