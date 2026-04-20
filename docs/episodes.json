@@ -211,5 +211,15 @@
     "pub_date": "2026-04-17T03:54:15.057346+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260417_115324_Flow_Map_LM_一步生成高质量文本_chapters.json",
     "duration_seconds": 1174.080047
+  },
+  {
+    "title": "Ouro：让大模型在隐空间循环推理",
+    "description": "这期聊一篇很有启发性的工作：不靠生成更长思维链，而是让同一组 Transformer 层在隐空间里反复执行，把“多步推理”前移到预训练阶段。它的关键设计是共享参数的循环结构、自适应退出 gate，以及专门按“多算一轮值不值”来训练 gate，让模型对简单题少算、对难题多想。实验最值得关注的结论是：loop 主要增强的不是知识存储，而是知识调用、组合与递归加工能力，也因此形成了参数规模、数据规模之外的第三个 scaling axis。\n\n00:00 问题与动机\n02:09 方法全景\n03:52 关键机制拆解\n08:12 训练与推理闭环\n11:27 实验怎样支撑方法\n14:22 图表导读\n16:09 价值、局限与启发\n\nSource: paper | https://arxiv.org/pdf/2510.25741",
+    "filename": "20260420_124024_Ouro_让大模型在隐空间循环推理.mp3",
+    "file_size": 17770458,
+    "source_url": "https://arxiv.org/pdf/2510.25741",
+    "pub_date": "2026-04-20T04:41:36.296869+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260420_124024_Ouro_让大模型在隐空间循环推理_chapters.json",
+    "duration_seconds": 1109.1360320000001
   }
 ]
