@@ -231,5 +231,15 @@
     "pub_date": "2026-04-20T04:45:58.995375+00:00",
     "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260420_124445_Claude_Code_拆解生产级代码Agent方法空间_chapters.json",
     "duration_seconds": 983.448028
+  },
+  {
+    "title": "循环训练成本：拆解递归模型的算力与显存账",
+    "description": "这期节目不讲新模型，而是专门拆解循环/递归 LLM 训练到底贵在哪。我们会用七种训练变体对比 shared weights、per-step loss、detach、instant update、truncation、checkpointing 各自改变了什么。你会听明白哪些方法在省激活、哪些只是在改梯度路径，以及为什么真正的显存下降来自 detach 配合 streaming backward。\n\n00:00 问题与动机\n02:22 整体方法地图\n04:36 关键机制拆解\n11:40 训练与推理流程\n14:15 实验怎样支撑方法\n16:38 图表导读\n18:32 价值、局限与启发\n\nSource: report | https://huskydoge.github.io/husky-blog/posts/recursive_models/loop-cost/",
+    "filename": "20260420_125056_循环训练成本_拆解递归模型的算力与显存账.mp3",
+    "file_size": 21529580,
+    "source_url": "https://huskydoge.github.io/husky-blog/posts/recursive_models/loop-cost/",
+    "pub_date": "2026-04-20T04:52:28.259142+00:00",
+    "chapters_url": "https://anything-to-podcast.oss-cn-hangzhou.aliyuncs.com/episodes/20260420_125056_循环训练成本_拆解递归模型的算力与显存账_chapters.json",
+    "duration_seconds": 1343.8800700000002
   }
 ]
